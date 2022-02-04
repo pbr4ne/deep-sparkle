@@ -4,7 +4,8 @@
   "description": "Very Serious Discord Bot",
   "main": "src/DeepSparkle.js",
   "scripts": {
-    "start": "node src/DeepSparkle.js"
+    "start": "node src/DeepSparkle.js",
+    "unit": "jest src"
   },
   "author": "pbr4ne",
   "license": "MIT",
@@ -12,5 +13,8 @@
     "axios": "^0.25.0",
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "jest": "^27.4.7"
   }
 }
