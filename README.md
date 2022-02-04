@@ -20,6 +20,11 @@ CLIENT_TOKEN='<token>'
 npm run unit
 ```
 
+## Run linter
+```
+npx run lint
+```
+
 ## Run bot
 ```
 npm run start
