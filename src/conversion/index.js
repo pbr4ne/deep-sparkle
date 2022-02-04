@@ -18,6 +18,14 @@ const converters = [{
   regex: new RegExp(/(^| )([+-]?\d+(\.\d+)*)\s?(lb|lbs|pound|pounds)($|[ ,.:?!])/g),
   fromUnit: 'lb',
   toUnit: 'kg',
+},{
+  regex: new RegExp(/(^| )([+-]?\d+(\.\d+)*)\s?(km|kms|kilometre|kilometres|kilometer|kilometers)($|[ ,.:?!])/g),
+  fromUnit: 'km',
+  toUnit: 'mi',
+},{
+  regex: new RegExp(/(^| )([+-]?\d+(\.\d+)*)\s?(mi|mis|mile|miles)($|[ ,.:?!])/g),
+  fromUnit: 'mi',
+  toUnit: 'km',
 }];
 
 const resetRegex = (regex) => {

@@ -1,8 +1,9 @@
 const { convert } = require('./index');
 
+//todo test for leading spaces
 describe('conversions', () => {
   describe('feet to metres', () => {
-    test.each(['ft', ' ft', 'feet', '\'', '’'])('convert %s to m', (a) => {
+    test.each(['ft', 'feet', '\'', '’'])('convert %s to m', (a) => {
       const conversion = convert(`10${a}`);
       expect(conversion.length).toBe(1);
       expect(conversion[0]).toBe('10 ft = 3.05 m');
@@ -10,7 +11,7 @@ describe('conversions', () => {
   });
 
   describe('metres to feet', () => {
-    test.each(['m', ' m', 'metre', 'metres', 'meters'])('convert %s to m', (a) => {
+    test.each(['m', 'metre', 'metres', 'meters'])('convert %s to m', (a) => {
       const conversion = convert(`10${a}`);
       expect(conversion.length).toBe(1);
       expect(conversion[0]).toBe('10 m = 32.81 ft');
@@ -18,7 +19,7 @@ describe('conversions', () => {
   });
 
   describe('kilograms to pounds', () => {
-    test.each(['kg', ' kg', 'kgs', ' kgs', ' kilo', 'kilos', 'kilograms'])('convert %s to lb', (a) => {
+    test.each(['kg', 'kgs', 'kilo', 'kilos', 'kilograms'])('convert %s to lb', (a) => {
       const conversion = convert(`10${a}`);
       expect(conversion.length).toBe(1);
       expect(conversion[0]).toBe('10 kg = 22.05 lb');
@@ -26,10 +27,26 @@ describe('conversions', () => {
   });
 
   describe('pounds to kilograms', () => {
-    test.each(['lb', ' lb', 'lbs', ' lbs', ' pound', 'pounds'])('convert %s to kg', (a) => {
+    test.each(['lb', 'lbs', 'pound', 'pounds'])('convert %s to kg', (a) => {
       const conversion = convert(`10${a}`);
       expect(conversion.length).toBe(1);
       expect(conversion[0]).toBe('10 lb = 4.54 kg');
+    });
+  });
+
+  describe('kilometres to miles', () => {
+    test.each(['km', 'kms', 'kilometre', 'kilometres', 'kilometer', 'kilometers'])('convert %s to mi', (a) => {
+      const conversion = convert(`10${a}`);
+      expect(conversion.length).toBe(1);
+      expect(conversion[0]).toBe('10 km = 6.21 mi');
+    });
+  });
+
+  describe('miles to kilometres', () => {
+    test.each(['mi', 'mis', 'mile', 'miles'])('convert %s to km', (a) => {
+      const conversion = convert(`10${a}`);
+      expect(conversion.length).toBe(1);
+      expect(conversion[0]).toBe('10 mi = 16.09 km');
     });
   });
 
