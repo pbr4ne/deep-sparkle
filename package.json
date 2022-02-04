@@ -2,18 +2,15 @@
   "name": "deep-sparkle",
   "version": "1.0.0",
   "description": "Very Serious Discord Bot",
-  "main": "index.js",
+  "main": "src/DeepSparkle.js",
   "scripts": {
-    "start": "ts-node src/DeepSparkle.ts"
+    "start": "node src/DeepSparkle.js"
   },
   "author": "pbr4ne",
   "license": "MIT",
   "dependencies": {
-    "@types/node": "^17.0.14",
     "axios": "^0.25.0",
     "discord.js": "^13.6.0",
-    "dotenv": "^16.0.0",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.5.5"
+    "dotenv": "^16.0.0"
   }
 }
