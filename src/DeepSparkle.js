@@ -14,8 +14,18 @@ bot.once('ready', () => {
   bot.user.setActivity('with my toys', { type: 'PLAYING' });
 });
 
-//conversion
 bot.on('messageCreate', message => {
+  
+  //don't respond to my own message
+  if(bot.user.id === message.author.id) {
+    return;
+  }
+
+  //only respond in specified channel, if it is indeed specified
+  if(process.env.CHANNEL_ID && message.channel.id !== process.env.CHANNEL_ID) {
+    return;
+  }
+
   const content = message.content.toLowerCase();
   const originalContent = message.content;
 
