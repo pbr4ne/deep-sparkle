@@ -29,7 +29,8 @@ bot.on('messageCreate', message => {
   const content = message.content.toLowerCase();
 
   if (content.includes('convert')) {
-    message.channel.send(convert(content));
+    //todo - make an embed and include all items in array
+    message.channel.send(convert(content)[0]);
   }
 });
 
