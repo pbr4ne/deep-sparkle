@@ -16,5 +16,5 @@ CLIENT_TOKEN='<token>'
 
 ## Run bot
 ```
-node index.ts
+node run start
 ```
