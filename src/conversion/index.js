@@ -1,17 +1,23 @@
 const convert = require('convert-units');
 
 const NUMBER_REGEX = new RegExp(/([+-]?\d+(\.\d+)*)/g);
-const FT_REGEX = new RegExp(/(^| )([+-]?\d+(\.\d+)*)\s?('|’|ft|feet)($|[ ,.:?!])/g);
-const M_REGEX = new RegExp(/(^| )([+-]?\d+(\.\d+)*)\s?(m|metre|metres|meter|meters)($|[ ,.:?!])/g);
 
 const converters = [{
-  regex: FT_REGEX,
+  regex: new RegExp(/(^| )([+-]?\d+(\.\d+)*)\s?('|’|ft|feet)($|[ ,.:?!])/g),
   fromUnit: 'ft',
   toUnit: 'm',
 },{
-  regex: M_REGEX,
+  regex: new RegExp(/(^| )([+-]?\d+(\.\d+)*)\s?(m|metre|metres|meter|meters)($|[ ,.:?!])/g),
   fromUnit: 'm',
   toUnit: 'ft',
+},{
+  regex: new RegExp(/(^| )([+-]?\d+(\.\d+)*)\s?(kg|kgs|kilo|kilos|kilograms)($|[ ,.:?!])/g),
+  fromUnit: 'kg',
+  toUnit: 'lb',
+},{
+  regex: new RegExp(/(^| )([+-]?\d+(\.\d+)*)\s?(lb|lbs|pound|pounds)($|[ ,.:?!])/g),
+  fromUnit: 'lb',
+  toUnit: 'kg',
 }];
 
 const resetRegex = (regex) => {
