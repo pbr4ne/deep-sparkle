@@ -1,5 +1,5 @@
 const { convert } = require('./index');
 
-test('convert', () => {
-  expect(convert('15ft')).toBe('15\' = 4.57 m');
+test('convert ft to m', () => {
+  expect(convert('10ft')).toBe('10\' = 3.05 m');
 });
