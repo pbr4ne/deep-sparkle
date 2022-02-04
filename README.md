@@ -22,5 +22,5 @@ npm run unit
 
 ## Run bot
 ```
-node run start
+npm run start
 ```
