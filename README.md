@@ -14,6 +14,12 @@ In the root `deep-sparkle` directory, create a `.env` file with your discord bot
 CLIENT_TOKEN='<token>'
 ```
 
+## Run unit tests
+
+```
+npm run unit
+```
+
 ## Run bot
 ```
 node run start
