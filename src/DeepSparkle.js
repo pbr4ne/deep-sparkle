@@ -31,7 +31,10 @@ bot.on('messageCreate', message => {
 
   //convert
   if (content.includes('convert')) {  
-    message.channel.send({ embeds: [getEmbed(convert(content))] });
+    const embed = getEmbed(convert(content));
+    if (embed) {
+      message.channel.send({ embeds: [embed] });
+    }
   }
 });
 
