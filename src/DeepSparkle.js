@@ -3,6 +3,13 @@ const { Client, Intents } = require('discord.js');
 const { convert } = require('./conversion/index');
 const { getEmbed } = require('./embed/index');
 
+const log4js = require('log4js');
+log4js.configure({
+  appenders: { deepSparkle: { type: 'file', filename: 'logs/deep-sparkle.log' } },
+  categories: { default: { appenders: ['deepSparkle'], level: 'info' } }
+});
+const logger = log4js.getLogger('deepSparkle');
+
 const intents = [
   Intents.FLAGS.GUILDS,
   Intents.FLAGS.GUILD_MESSAGES
@@ -10,8 +17,7 @@ const intents = [
 const bot = new Client({ intents });
 
 bot.once('ready', () => {
-  console.log(`Logged in as ${bot.user.tag}!`);
-
+  logger.info(`Logged in as ${bot.user.tag}!`);
   bot.user.setActivity('with my toys', { type: 'PLAYING' });
 });
 
