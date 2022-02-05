@@ -2,6 +2,13 @@ const convert = require('convert-units');
 const Response = require('../shared/response');
 const Field = require('../shared/field');
 
+const log4js = require('log4js');
+log4js.configure({
+  appenders: { conversion: { type: 'file', filename: 'logs/deep-sparkle.log' } },
+  categories: { default: { appenders: ['conversion'], level: 'info' } }
+});
+const logger = log4js.getLogger('conversion');
+
 const NUMBER_REGEX = new RegExp(/([+-]?\d+(\.\d+)*)/g);
 
 const converters = [{
@@ -49,6 +56,7 @@ exports.convert = (content) => {
         const convertedValue = convert(fromNumber).from(converter.fromUnit).to(converter.toUnit).toFixed(2);
         const label = `Converted to ${convert().list().find(f => f.abbr == converter.toUnit).plural.toLowerCase()}`;
         const content = `${fromNumber} ${converter.fromUnit} = ${convertedValue} ${converter.toUnit}`;
+        logger.info(`${label}/${content}`);
         return new Field(label, content);
       }
     });
