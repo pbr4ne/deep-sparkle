@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { Client, Intents } = require('discord.js');
 const { messageHandler } = require('./handlers/messageHandler/index');
+const { readyHandler } = require('./handlers/readyHandler/index');
 
 const log4js = require('log4js');
 log4js.configure({
@@ -15,11 +16,7 @@ const intents = [
 ];
 const bot = new Client({ intents });
 
-bot.once('ready', () => {
-  logger.info(`Logged in as ${bot.user.tag}!`);
-  bot.user.setActivity('with my toys', { type: 'PLAYING' });
-});
-
+bot.once('ready', readyHandler);
 bot.on('messageCreate', messageHandler);
 
 process.on('uncaughtException', error => logger.error('Uncaught Error', error));
