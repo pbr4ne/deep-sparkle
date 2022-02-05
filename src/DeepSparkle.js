@@ -1,8 +1,6 @@
 require('dotenv').config();
 const { Client, Intents } = require('discord.js');
-const { clap } = require('./clap/index');
-const { convert } = require('./convert/index');
-const { embed } = require('./embed/index');
+const { messageHandler } = require('./handlers/messageHandler/index');
 
 const log4js = require('log4js');
 log4js.configure({
@@ -22,33 +20,7 @@ bot.once('ready', () => {
   bot.user.setActivity('with my toys', { type: 'PLAYING' });
 });
 
-bot.on('messageCreate', message => {
-
-  //don't respond to my own message
-  if (bot.user.id === message.author.id) {
-    return;
-  }
-
-  //only respond in specified channel, if it is indeed specified
-  if (process.env.CHANNEL_ID && message.channel.id !== process.env.CHANNEL_ID) {
-    return;
-  }
-
-  const content = message.content.toLowerCase();
-
-  //convert
-  if (content.includes('convert')) {
-    const convertResponse = embed(convert(content));
-    if (convertResponse) {
-      message.channel.send({ embeds: [convertResponse] });
-    }
-  }
-  //clap
-  if (content.startsWith('ds clap')) {
-    const clapResponse = clap(content.slice('ds clap '.length));
-    message.channel.send(clapResponse);
-  }
-});
+bot.on('messageCreate', messageHandler);
 
 process.on('uncaughtException', error => logger.error('Uncaught Error', error));
 process.on('unhandledRejection', error => logger.error('Unhandled Promise Rejection', error));
