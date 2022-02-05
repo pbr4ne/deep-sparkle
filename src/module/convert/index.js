@@ -1,6 +1,6 @@
 const convert = require('convert-units');
-const Response = require('../shared/response');
-const Field = require('../shared/field');
+const Response = require('../../shared/response');
+const Field = require('../../shared/field');
 
 const log4js = require('log4js');
 log4js.configure({

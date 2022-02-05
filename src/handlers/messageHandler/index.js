@@ -1,5 +1,5 @@
-const { clap } = require('../../clap/index');
-const { convertz } = require('../../convert/index');
+const { clap } = require('../../module/clap/index');
+const { convert } = require('../../module/convert/index');
 const { embed } = require('../../embed/index');
 
 exports.messageHandler = async (message) => {
@@ -17,7 +17,7 @@ exports.messageHandler = async (message) => {
 
   //convert
   if (content.includes('convert')) {
-    const convertResponse = embed(convertz(content));
+    const convertResponse = embed(convert(content));
     if (convertResponse) {
       message.channel.send({ embeds: [convertResponse] });
     }
