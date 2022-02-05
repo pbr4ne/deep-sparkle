@@ -1,6 +1,6 @@
 const { clap } = require('../../modules/clap/index');
 const { convert } = require('../../modules/convert/index');
-const { embed } = require('../../embed/index');
+const { embed } = require('../../modules/embed/index');
 
 exports.messageHandler = async (message) => {
   //don't respond to my own message
