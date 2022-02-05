@@ -1,5 +1,6 @@
 require('dotenv').config();
 const { Client, Intents } = require('discord.js');
+const { clap } = require('./clap/index');
 const { convert } = require('./conversion/index');
 const { getEmbed } = require('./embed/index');
 
@@ -41,6 +42,11 @@ bot.on('messageCreate', message => {
     if (embed) {
       message.channel.send({ embeds: [embed] });
     }
+  }
+  //clap
+  if (content.startsWith('ds clap')) {
+    const clapResponse = clap(content.slice('ds clap '.length));
+    message.channel.send(clapResponse);
   }
 });
 
