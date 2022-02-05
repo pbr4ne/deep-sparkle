@@ -36,12 +36,15 @@ bot.on('messageCreate', message => {
   const content = message.content.toLowerCase();
 
   //convert
-  if (content.includes('convert')) {  
+  if (content.includes('convert')) {
     const embed = getEmbed(convert(content));
     if (embed) {
       message.channel.send({ embeds: [embed] });
     }
   }
 });
+
+process.on('uncaughtException', error => logger.error('Uncaught Error', error));
+process.on('unhandledRejection', error => logger.error('Unhandled Promise Rejection', error));
 
 bot.login(process.env.CLIENT_TOKEN);
