@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 exports.getEmbed = (response) => {
-  if (!response.fields) {
+  if (!response || !response.fields) {
     return;
   }
   const embed = new Discord.MessageEmbed().setColor('#F012BE');
