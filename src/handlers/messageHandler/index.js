@@ -1,5 +1,5 @@
-const { clap } = require('../../module/clap/index');
-const { convert } = require('../../module/convert/index');
+const { clap } = require('../../modules/clap/index');
+const { convert } = require('../../modules/convert/index');
 const { embed } = require('../../embed/index');
 
 exports.messageHandler = async (message) => {
