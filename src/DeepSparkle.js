@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { Client, Intents } = require('discord.js');
 const { convert } = require('./conversion/index');
+const { getEmbed } = require('./embed/index');
 
 const intents = [
   Intents.FLAGS.GUILDS,
@@ -28,9 +29,9 @@ bot.on('messageCreate', message => {
 
   const content = message.content.toLowerCase();
 
-  if (content.includes('convert')) {
-    //todo - make an embed and include all items in array
-    message.channel.send(convert(content)[0]);
+  //convert
+  if (content.includes('convert')) {  
+    message.channel.send({ embeds: [getEmbed(convert(content))] });
   }
 });
 

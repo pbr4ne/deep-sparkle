@@ -1,4 +1,6 @@
 const convert = require('convert-units');
+const Response = require('../shared/response');
+const Field = require('../shared/field');
 
 const NUMBER_REGEX = new RegExp(/([+-]?\d+(\.\d+)*)/g);
 
@@ -33,9 +35,8 @@ const resetRegex = (regex) => {
   NUMBER_REGEX.lastIndex = 0;
 };
 
-exports.convert = function(content) {
-  
-  return converters
+exports.convert = (content) => {
+  const fieldArray = converters
     .filter(converter => {
       resetRegex(converter.regex);
       return converter.regex.exec(content);
@@ -46,7 +47,11 @@ exports.convert = function(content) {
       if (match) {
         const fromNumber = Number.parseFloat(NUMBER_REGEX.exec(match)[0]);
         const convertedValue = convert(fromNumber).from(converter.fromUnit).to(converter.toUnit).toFixed(2);
-        return `${fromNumber} ${converter.fromUnit} = ${convertedValue} ${converter.toUnit}`;
+        const label = `Converted to ${convert().list().find(f => f.abbr == converter.toUnit).plural.toLowerCase()}`;
+        const content = `${fromNumber} ${converter.fromUnit} = ${convertedValue} ${converter.toUnit}`;
+        return new Field(label, content);
       }
     });
+
+  return new Response(fieldArray);
 };
