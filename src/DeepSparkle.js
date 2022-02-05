@@ -1,8 +1,8 @@
 require('dotenv').config();
 const { Client, Intents } = require('discord.js');
 const { clap } = require('./clap/index');
-const { convert } = require('./conversion/index');
-const { getEmbed } = require('./embed/index');
+const { convert } = require('./convert/index');
+const { embed } = require('./embed/index');
 
 const log4js = require('log4js');
 log4js.configure({
@@ -38,9 +38,9 @@ bot.on('messageCreate', message => {
 
   //convert
   if (content.includes('convert')) {
-    const embed = getEmbed(convert(content));
-    if (embed) {
-      message.channel.send({ embeds: [embed] });
+    const convertResponse = embed(convert(content));
+    if (convertResponse) {
+      message.channel.send({ embeds: [convertResponse] });
     }
   }
   //clap

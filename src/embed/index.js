@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-exports.getEmbed = (response) => {
+exports.embed = (response) => {
   if (!response || !response.fields) {
     return;
   }
