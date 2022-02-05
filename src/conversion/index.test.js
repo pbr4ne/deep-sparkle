@@ -3,7 +3,7 @@ const { convert } = require('./index');
 //todo test for leading spaces
 describe('conversions', () => {
   describe('feet to metres', () => {
-    test.each(['ft', 'feet', '\'', '’'])('convert %s to m', (a) => {
+    test.each(['ft', 'feet', '\'', '’'])('should convert %s to m', (a) => {
       const conversion = convert(`10${a}`);
       expect(conversion.fields.length).toBe(1);
       expect(conversion.fields[0].label).toBe('Converted to meters');
@@ -12,7 +12,7 @@ describe('conversions', () => {
   });
 
   describe('metres to feet', () => {
-    test.each(['m', 'metre', 'metres', 'meters'])('convert %s to ft', (a) => {
+    test.each(['m', 'metre', 'metres', 'meters'])('should convert %s to ft', (a) => {
       const conversion = convert(`10${a}`);
       expect(conversion.fields.length).toBe(1);
       expect(conversion.fields[0].label).toBe('Converted to feet');
@@ -21,7 +21,7 @@ describe('conversions', () => {
   });
 
   describe('kilograms to pounds', () => {
-    test.each(['kg', 'kgs', 'kilo', 'kilos', 'kilograms'])('convert %s to lb', (a) => {
+    test.each(['kg', 'kgs', 'kilo', 'kilos', 'kilograms'])('should convert %s to lb', (a) => {
       const conversion = convert(`10${a}`);
       expect(conversion.fields.length).toBe(1);
       expect(conversion.fields[0].label).toBe('Converted to pounds');
@@ -30,7 +30,7 @@ describe('conversions', () => {
   });
 
   describe('pounds to kilograms', () => {
-    test.each(['lb', 'lbs', 'pound', 'pounds'])('convert %s to kg', (a) => {
+    test.each(['lb', 'lbs', 'pound', 'pounds'])('should convert %s to kg', (a) => {
       const conversion = convert(`10${a}`);
       expect(conversion.fields.length).toBe(1);
       expect(conversion.fields[0].label).toBe('Converted to kilograms');
@@ -39,7 +39,7 @@ describe('conversions', () => {
   });
 
   describe('kilometres to miles', () => {
-    test.each(['km', 'kms', 'kilometre', 'kilometres', 'kilometer', 'kilometers'])('convert %s to mi', (a) => {
+    test.each(['km', 'kms', 'kilometre', 'kilometres', 'kilometer', 'kilometers'])('should convert %s to mi', (a) => {
       const conversion = convert(`10${a}`);
       expect(conversion.fields.length).toBe(1);
       expect(conversion.fields[0].label).toBe('Converted to miles');
@@ -48,7 +48,7 @@ describe('conversions', () => {
   });
 
   describe('miles to kilometres', () => {
-    test.each(['mi', 'mis', 'mile', 'miles'])('convert %s to km', (a) => {
+    test.each(['mi', 'mis', 'mile', 'miles'])('should convert %s to km', (a) => {
       const conversion = convert(`10${a}`);
       expect(conversion.fields.length).toBe(1);
       expect(conversion.fields[0].label).toBe('Converted to kilometers');
@@ -56,7 +56,7 @@ describe('conversions', () => {
     });
   });
 
-  test('convert multiple', () => {
+  test('should convert multiple', () => {
     const conversion = convert('10ft 10m');
     expect(conversion.fields.length).toBe(2);
     expect(conversion.fields[0].label).toBe('Converted to meters');
@@ -65,7 +65,7 @@ describe('conversions', () => {
     expect(conversion.fields[1].content).toBe('10 m = 32.81 ft');
   });
 
-  test('no conversion', () => {
+  test('should not convert if nothing to convert', () => {
     expect(convert('hello').fields.length).toBe(0);
   });
 });
