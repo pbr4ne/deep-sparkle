@@ -37,6 +37,16 @@ const converters = [{
   regex: new RegExp(regex_template('mi|mis|mile|miles'),'g'),
   fromUnit: 'mi',
   toUnit: 'km',
+},{
+  regex: new RegExp(regex_template('°?º?\\s?(degrees)?\\s?(deg)?\\s?([Cc])'),'g'),
+  fromUnit: 'C',
+  toUnit: 'F',
+  decimalDigits: 0,
+},{
+  regex: new RegExp(regex_template('°?º?\\s?(degrees)?\\s?(deg)?\\s?([Ff])'),'g'),
+  fromUnit: 'F',
+  toUnit: 'C',
+  decimalDigits: 0,
 }];
 
 const resetRegex = (regex) => {
@@ -55,7 +65,10 @@ exports.convert = (content) => {
       const match = converter.regex.exec(content);
       if (match) {
         const fromNumber = Number.parseFloat(NUMBER_REGEX.exec(match)[0]);
-        const convertedValue = convert(fromNumber).from(converter.fromUnit).to(converter.toUnit).toFixed(2);
+        const convertedValue = convert(fromNumber)
+          .from(converter.fromUnit)
+          .to(converter.toUnit)
+          .toFixed(converter.decimalDigits != undefined ? converter.decimalDigits : 2);
         const label = `Converted to ${convert().list().find(f => f.abbr == converter.toUnit).plural.toLowerCase()}`;
         const content = `${fromNumber} ${converter.fromUnit} = ${convertedValue} ${converter.toUnit}`;
         logger.info(`${label}/${content}`);

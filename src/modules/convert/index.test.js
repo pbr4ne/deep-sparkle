@@ -56,6 +56,24 @@ describe('conversions', () => {
     });
   });
 
+  describe('C to F', () => {
+    test.each(['c', 'C', '°c', '°C', '° c', '° C', 'deg c', 'deg C', 'degrees c', 'degrees C'])('should convert %s to F', (a) => {
+      const conversion = convert(`10${a}`);
+      expect(conversion.fields.length).toBe(1);
+      expect(conversion.fields[0].label).toBe('Converted to degrees fahrenheit');
+      expect(conversion.fields[0].content).toBe('10 C = 50 F');
+    });
+  });
+
+  describe('F to C', () => {
+    test.each(['f', 'F', '°f', '°F', '° f', '° F', 'deg f', 'deg F', 'degrees f', 'degrees F'])('should convert %s to C', (a) => {
+      const conversion = convert(`10${a}`);
+      expect(conversion.fields.length).toBe(1);
+      expect(conversion.fields[0].label).toBe('Converted to degrees celsius');
+      expect(conversion.fields[0].content).toBe('10 F = -12 C');
+    });
+  });
+
   test('should convert multiple', () => {
     const conversion = convert('10ft 10m');
     expect(conversion.fields.length).toBe(2);
