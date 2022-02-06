@@ -30,14 +30,6 @@ const converters = [{
   fromUnit: 'in',
   toUnit: 'cm',
 },{
-  regex: new RegExp(regex_template('kg|kgs|kilo|kilos|kilograms'),'g'),
-  fromUnit: 'kg',
-  toUnit: 'lb',
-},{
-  regex: new RegExp(regex_template('lb|lbs|pound|pounds'),'g'),
-  fromUnit: 'lb',
-  toUnit: 'kg',
-},{
   regex: new RegExp(regex_template('km|kms|kilometre|kilometres|kilometer|kilometers'),'g'),
   fromUnit: 'km',
   toUnit: 'mi',
@@ -45,6 +37,14 @@ const converters = [{
   regex: new RegExp(regex_template('mi|mis|mile|miles'),'g'),
   fromUnit: 'mi',
   toUnit: 'km',
+},{
+  regex: new RegExp(regex_template('kg|kgs|kilo|kilos|kilograms'),'g'),
+  fromUnit: 'kg',
+  toUnit: 'lb',
+},{
+  regex: new RegExp(regex_template('lb|lbs|pound|pounds'),'g'),
+  fromUnit: 'lb',
+  toUnit: 'kg',
 },{
   regex: new RegExp(regex_template('°?º?\\s?(degrees)?\\s?(deg)?\\s?([Cc])'),'g'),
   fromUnit: 'C',

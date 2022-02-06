@@ -4,14 +4,14 @@ describe('conversions', () => {
   const conversionTestArray = new Array();
   ['ft', 'feet', '\'', '’'].forEach(unit => conversionTestArray.push([10, unit, 3.05, 'm', 'ft', 'meters']));
   ['m', 'metre', 'metres', 'meters'].forEach(unit => conversionTestArray.push([10, unit, 32.81, 'ft', 'm', 'feet']));
-  ['kg', 'kgs', 'kilo', 'kilos', 'kilograms'].forEach(unit => conversionTestArray.push([10, unit, 22.05, 'lb', 'kg', 'pounds']));
-  ['lb', 'lbs', 'pound', 'pounds'].forEach(unit => conversionTestArray.push([10, unit, 4.54, 'kg', 'lb', 'kilograms']));
-  ['km', 'kms', 'kilometre', 'kilometres', 'kilometer', 'kilometers'].forEach(unit => conversionTestArray.push([10, unit, 6.21, 'mi', 'km', 'miles']));
-  ['mi', 'mis', 'mile', 'miles'].forEach(unit => conversionTestArray.push([10, unit, 16.09, 'km', 'mi', 'kilometers']));
-  ['c', 'C', '°c', '°C', '° c', '° C', 'deg c', 'deg C', 'degrees c', 'degrees C'].forEach(unit => conversionTestArray.push([10, unit, 50, 'F', 'C', 'degrees fahrenheit']));
-  ['f', 'F', '°f', '°F', '° f', '° F', 'deg f', 'deg F', 'degrees f', 'degrees F'].forEach(unit => conversionTestArray.push([10, unit, -12, 'C', 'F', 'degrees celsius']));
   ['cm', 'cms', 'centimetre', 'centimetres', 'centimeters', 'centimeters'].forEach(unit => conversionTestArray.push([10, unit, 3.94, 'in', 'cm', 'inches']));
   ['"', '”', 'inch', 'inches'].forEach(unit => conversionTestArray.push([10, unit, '25.40', 'cm', 'in', 'centimeters']));
+  ['km', 'kms', 'kilometre', 'kilometres', 'kilometer', 'kilometers'].forEach(unit => conversionTestArray.push([10, unit, 6.21, 'mi', 'km', 'miles']));
+  ['mi', 'mis', 'mile', 'miles'].forEach(unit => conversionTestArray.push([10, unit, 16.09, 'km', 'mi', 'kilometers']));
+  ['kg', 'kgs', 'kilo', 'kilos', 'kilograms'].forEach(unit => conversionTestArray.push([10, unit, 22.05, 'lb', 'kg', 'pounds']));
+  ['lb', 'lbs', 'pound', 'pounds'].forEach(unit => conversionTestArray.push([10, unit, 4.54, 'kg', 'lb', 'kilograms']));
+  ['c', 'C', '°c', '°C', '° c', '° C', 'deg c', 'deg C', 'degrees c', 'degrees C'].forEach(unit => conversionTestArray.push([10, unit, 50, 'F', 'C', 'degrees fahrenheit']));
+  ['f', 'F', '°f', '°F', '° f', '° F', 'deg f', 'deg F', 'degrees f', 'degrees F'].forEach(unit => conversionTestArray.push([10, unit, -12, 'C', 'F', 'degrees celsius']));
 
   //no leading spaces
   test.each(conversionTestArray)('should convert %s%s to %s %s', (inputAmount, inputUnit, expectedAmount, expectedOutputUnit, expectedInputUnit, expectedOutputUnitLong) => {
