@@ -22,6 +22,14 @@ const converters = [{
   fromUnit: 'm',
   toUnit: 'ft',
 },{
+  regex: new RegExp(regex_template('cm|cms|centimetre|centimetres|centimeters|centimeters'),'g'),
+  fromUnit: 'cm',
+  toUnit: 'in',
+},{
+  regex: new RegExp(regex_template('"|”|inch|inches'),'g'),
+  fromUnit: 'in',
+  toUnit: 'cm',
+},{
   regex: new RegExp(regex_template('kg|kgs|kilo|kilos|kilograms'),'g'),
   fromUnit: 'kg',
   toUnit: 'lb',

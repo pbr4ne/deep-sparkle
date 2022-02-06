@@ -10,6 +10,8 @@ describe('conversions', () => {
   ['mi', 'mis', 'mile', 'miles'].forEach(unit => conversionTestArray.push([10, unit, 16.09, 'km', 'mi', 'kilometers']));
   ['c', 'C', '°c', '°C', '° c', '° C', 'deg c', 'deg C', 'degrees c', 'degrees C'].forEach(unit => conversionTestArray.push([10, unit, 50, 'F', 'C', 'degrees fahrenheit']));
   ['f', 'F', '°f', '°F', '° f', '° F', 'deg f', 'deg F', 'degrees f', 'degrees F'].forEach(unit => conversionTestArray.push([10, unit, -12, 'C', 'F', 'degrees celsius']));
+  ['cm', 'cms', 'centimetre', 'centimetres', 'centimeters', 'centimeters'].forEach(unit => conversionTestArray.push([10, unit, 3.94, 'in', 'cm', 'inches']));
+  ['"', '”', 'inch', 'inches'].forEach(unit => conversionTestArray.push([10, unit, '25.40', 'cm', 'in', 'centimeters']));
 
   //no leading spaces
   test.each(conversionTestArray)('should convert %s%s to %s %s', (inputAmount, inputUnit, expectedAmount, expectedOutputUnit, expectedInputUnit, expectedOutputUnitLong) => {
