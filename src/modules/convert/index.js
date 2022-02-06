@@ -9,30 +9,32 @@ log4js.configure({
 });
 const logger = log4js.getLogger('conversion');
 
-const NUMBER_REGEX = new RegExp(/([+-]?\d+(\.\d+)*)/g);
+const NUMBER_MATCH = '[+-]?\\d+(\\.\\d+)*';
+const NUMBER_REGEX = new RegExp(`(${NUMBER_MATCH})`,'g');
+const regex_template = expression => `(^| )(${NUMBER_MATCH})\\s?(${expression})($|[ ,.:?!])`;
 
 const converters = [{
-  regex: new RegExp(/(^| )([+-]?\d+(\.\d+)*)\s?('|’|ft|feet)($|[ ,.:?!])/g),
+  regex: new RegExp(regex_template('\'|’|ft|feet'), 'g'),
   fromUnit: 'ft',
   toUnit: 'm',
 },{
-  regex: new RegExp(/(^| )([+-]?\d+(\.\d+)*)\s?(m|metre|metres|meter|meters)($|[ ,.:?!])/g),
+  regex: new RegExp(regex_template('m|metre|metres|meter|meters'),'g'),
   fromUnit: 'm',
   toUnit: 'ft',
 },{
-  regex: new RegExp(/(^| )([+-]?\d+(\.\d+)*)\s?(kg|kgs|kilo|kilos|kilograms)($|[ ,.:?!])/g),
+  regex: new RegExp(regex_template('kg|kgs|kilo|kilos|kilograms'),'g'),
   fromUnit: 'kg',
   toUnit: 'lb',
 },{
-  regex: new RegExp(/(^| )([+-]?\d+(\.\d+)*)\s?(lb|lbs|pound|pounds)($|[ ,.:?!])/g),
+  regex: new RegExp(regex_template('lb|lbs|pound|pounds'),'g'),
   fromUnit: 'lb',
   toUnit: 'kg',
 },{
-  regex: new RegExp(/(^| )([+-]?\d+(\.\d+)*)\s?(km|kms|kilometre|kilometres|kilometer|kilometers)($|[ ,.:?!])/g),
+  regex: new RegExp(regex_template('km|kms|kilometre|kilometres|kilometer|kilometers'),'g'),
   fromUnit: 'km',
   toUnit: 'mi',
 },{
-  regex: new RegExp(/(^| )([+-]?\d+(\.\d+)*)\s?(mi|mis|mile|miles)($|[ ,.:?!])/g),
+  regex: new RegExp(regex_template('mi|mis|mile|miles'),'g'),
   fromUnit: 'mi',
   toUnit: 'km',
 }];
