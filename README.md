@@ -2,30 +2,6 @@
 
 A discord bot.
 
-## Project setup
-```
-npm install
-```
+## Installation
 
-## Setup env
-In the root `deep-sparkle` directory, create a `.env` file with your discord bot token.
-
-```
-CLIENT_TOKEN='<token>'
-```
-
-## Run unit tests
-
-```
-npm run unit
-```
-
-## Run linter
-```
-npx run lint
-```
-
-## Run bot
-```
-npm run start
-```
+Instructions to run the bot locally can be found [here](installation.md).
