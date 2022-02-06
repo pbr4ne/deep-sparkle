@@ -1,67 +1,30 @@
 const { convert } = require('./index');
 
-//todo test for leading spaces
 describe('conversions', () => {
-  test.each`
-    inputUnit       | expectedAmount  | expectedInputUnit | expectedOutputUnit  |  expectedOutputUnitLong
-    ${'ft'}         | ${3.05}         | ${'ft'}           | ${'m'}              |  ${'meters'}
-    ${'feet'}       | ${3.05}         | ${'ft'}           | ${'m'}              |  ${'meters'}
-    ${'\''}         | ${3.05}         | ${'ft'}           | ${'m'}              |  ${'meters'}
-    ${'’'}          | ${3.05}         | ${'ft'}           | ${'m'}              |  ${'meters'}
-    ${'m'}          | ${32.81}        | ${'m'}            | ${'ft'}             |  ${'feet'}
-    ${'metre'}      | ${32.81}        | ${'m'}            | ${'ft'}             |  ${'feet'}
-    ${'meter'}      | ${32.81}        | ${'m'}            | ${'ft'}             |  ${'feet'}
-    ${'metres'}     | ${32.81}        | ${'m'}            | ${'ft'}             |  ${'feet'}
-    ${'meters'}     | ${32.81}        | ${'m'}            | ${'ft'}             |  ${'feet'}
-    ${'kg'}         | ${22.05}        | ${'kg'}           | ${'lb'}             |  ${'pounds'}
-    ${'kgs'}        | ${22.05}        | ${'kg'}           | ${'lb'}             |  ${'pounds'}
-    ${'kilo'}       | ${22.05}        | ${'kg'}           | ${'lb'}             |  ${'pounds'}
-    ${'kilos'}      | ${22.05}        | ${'kg'}           | ${'lb'}             |  ${'pounds'}
-    ${'kilograms'}  | ${22.05}        | ${'kg'}           | ${'lb'}             |  ${'pounds'}
-    ${'lb'}         | ${4.54}         | ${'lb'}           | ${'kg'}             |  ${'kilograms'}
-    ${'lbs'}        | ${4.54}         | ${'lb'}           | ${'kg'}             |  ${'kilograms'}
-    ${'pound'}      | ${4.54}         | ${'lb'}           | ${'kg'}             |  ${'kilograms'}
-    ${'pounds'}     | ${4.54}         | ${'lb'}           | ${'kg'}             |  ${'kilograms'}
-    ${'km'}         | ${6.21}         | ${'km'}           | ${'mi'}             |  ${'miles'}
-    ${'kms'}        | ${6.21}         | ${'km'}           | ${'mi'}             |  ${'miles'}
-    ${'kilometre'}  | ${6.21}         | ${'km'}           | ${'mi'}             |  ${'miles'}
-    ${'kilometres'} | ${6.21}         | ${'km'}           | ${'mi'}             |  ${'miles'}
-    ${'kilometer'}  | ${6.21}         | ${'km'}           | ${'mi'}             |  ${'miles'}
-    ${'kilometers'} | ${6.21}         | ${'km'}           | ${'mi'}             |  ${'miles'}
-    ${'mi'}         | ${16.09}        | ${'mi'}           | ${'km'}             |  ${'kilometers'}
-    ${'mis'}        | ${16.09}        | ${'mi'}           | ${'km'}             |  ${'kilometers'}
-    ${'mile'}       | ${16.09}        | ${'mi'}           | ${'km'}             |  ${'kilometers'}
-    ${'miles'}      | ${16.09}        | ${'mi'}           | ${'km'}             |  ${'kilometers'}
-    ${'c'}          | ${50}           | ${'C'}            | ${'F'}              |  ${'degrees fahrenheit'}
-    ${'C'}          | ${50}           | ${'C'}            | ${'F'}              |  ${'degrees fahrenheit'}
-    ${'°c'}         | ${50}           | ${'C'}            | ${'F'}              |  ${'degrees fahrenheit'}
-    ${'°C'}         | ${50}           | ${'C'}            | ${'F'}              |  ${'degrees fahrenheit'}
-    ${'° c'}        | ${50}           | ${'C'}            | ${'F'}              |  ${'degrees fahrenheit'}
-    ${'° C'}        | ${50}           | ${'C'}            | ${'F'}              |  ${'degrees fahrenheit'}
-    ${'deg c'}      | ${50}           | ${'C'}            | ${'F'}              |  ${'degrees fahrenheit'}
-    ${'deg C'}      | ${50}           | ${'C'}            | ${'F'}              |  ${'degrees fahrenheit'}
-    ${'degrees c'}  | ${50}           | ${'C'}            | ${'F'}              |  ${'degrees fahrenheit'}
-    ${'degrees C'}  | ${50}           | ${'C'}            | ${'F'}              |  ${'degrees fahrenheit'}
-    ${'f'}          | ${-12}          | ${'F'}            | ${'C'}              |  ${'degrees celsius'}
-    ${'F'}          | ${-12}          | ${'F'}            | ${'C'}              |  ${'degrees celsius'}
-    ${'°f'}         | ${-12}          | ${'F'}            | ${'C'}              |  ${'degrees celsius'}
-    ${'°F'}         | ${-12}          | ${'F'}            | ${'C'}              |  ${'degrees celsius'}
-    ${'° f'}        | ${-12}          | ${'F'}            | ${'C'}              |  ${'degrees celsius'}
-    ${'° F'}        | ${-12}          | ${'F'}            | ${'C'}              |  ${'degrees celsius'}
-    ${'deg f'}      | ${-12}          | ${'F'}            | ${'C'}              |  ${'degrees celsius'}
-    ${'deg F'}      | ${-12}          | ${'F'}            | ${'C'}              |  ${'degrees celsius'}
-    ${'degrees f'}  | ${-12}          | ${'F'}            | ${'C'}              |  ${'degrees celsius'}
-    ${'degrees F'}  | ${-12}          | ${'F'}            | ${'C'}              |  ${'degrees celsius'}
-  `('should convert $inputUnit to $expectedUnits', ({inputUnit, expectedAmount, expectedInputUnit, expectedOutputUnit, expectedOutputUnitLong}) => {
-    const conversion = convert(`10${inputUnit}`);
+  const conversionTestArray = new Array();
+  ['ft', 'feet', '\'', '’'].forEach(unit => conversionTestArray.push([10, unit, 3.05, 'm', 'ft', 'meters']));
+  ['m', 'metre', 'metres', 'meters'].forEach(unit => conversionTestArray.push([10, unit, 32.81, 'ft', 'm', 'feet']));
+  ['kg', 'kgs', 'kilo', 'kilos', 'kilograms'].forEach(unit => conversionTestArray.push([10, unit, 22.05, 'lb', 'kg', 'pounds']));
+  ['lb', 'lbs', 'pound', 'pounds'].forEach(unit => conversionTestArray.push([10, unit, 4.54, 'kg', 'lb', 'kilograms']));
+  ['km', 'kms', 'kilometre', 'kilometres', 'kilometer', 'kilometers'].forEach(unit => conversionTestArray.push([10, unit, 6.21, 'mi', 'km', 'miles']));
+  ['mi', 'mis', 'mile', 'miles'].forEach(unit => conversionTestArray.push([10, unit, 16.09, 'km', 'mi', 'kilometers']));
+  ['c', 'C', '°c', '°C', '° c', '° C', 'deg c', 'deg C', 'degrees c', 'degrees C'].forEach(unit => conversionTestArray.push([10, unit, 50, 'F', 'C', 'degrees fahrenheit']));
+  ['f', 'F', '°f', '°F', '° f', '° F', 'deg f', 'deg F', 'degrees f', 'degrees F'].forEach(unit => conversionTestArray.push([10, unit, -12, 'C', 'F', 'degrees celsius']));
+
+  //no leading spaces
+  test.each(conversionTestArray)('should convert %s%s to %s %s', (inputAmount, inputUnit, expectedAmount, expectedOutputUnit, expectedInputUnit, expectedOutputUnitLong) => {
+    const conversion = convert(`${inputAmount}${inputUnit}`);
     expect(conversion.fields.length).toBe(1);
     expect(conversion.fields[0].label).toBe(`Converted to ${expectedOutputUnitLong}`);
-    expect(conversion.fields[0].content).toBe(`10 ${expectedInputUnit} = ${expectedAmount} ${expectedOutputUnit}`);
+    expect(conversion.fields[0].content).toBe(`${inputAmount} ${expectedInputUnit} = ${expectedAmount} ${expectedOutputUnit}`);
+  });
 
-    const conversionLeadingSpaces = convert(`10 ${inputUnit}`);
-    expect(conversionLeadingSpaces.fields.length).toBe(1);
-    expect(conversionLeadingSpaces.fields[0].label).toBe(`Converted to ${expectedOutputUnitLong}`);
-    expect(conversionLeadingSpaces.fields[0].content).toBe(`10 ${expectedInputUnit} = ${expectedAmount} ${expectedOutputUnit}`);
+  //leading spaces
+  test.each(conversionTestArray)('should convert %s %s to %s %s', (inputAmount, inputUnit, expectedAmount, expectedOutputUnit, expectedInputUnit, expectedOutputUnitLong) => {
+    const conversion = convert(`${inputAmount} ${inputUnit}`);
+    expect(conversion.fields.length).toBe(1);
+    expect(conversion.fields[0].label).toBe(`Converted to ${expectedOutputUnitLong}`);
+    expect(conversion.fields[0].content).toBe(`${inputAmount} ${expectedInputUnit} = ${expectedAmount} ${expectedOutputUnit}`);
   });
 
   test('should convert multiple', () => {
