@@ -14,7 +14,8 @@ exports.translate = (content) => {
   const translateEndpoint = '/v3/translate?version=2018-05-01';
 
   if (!translationAPIURL || !translationAPIKey) {
-    return Promise.resolve('TRANSLATION_API_URL and TRANSLATION_API_KEY need to be set in .env');
+    logger.error('TRANSLATION_API_URL and TRANSLATION_API_KEY need to be set in .env');
+    return Promise.resolve('Cannot translate at this time.');
   }
 
   const model_id = content.substring(0, 5);
@@ -38,6 +39,6 @@ exports.translate = (content) => {
     return response.data.translations[0].translation;
   }).catch(error => {
     logger.error(error);
-    return 'cannot translate that language combination.';
+    return 'Cannot translate that language combination.';
   });
 };
