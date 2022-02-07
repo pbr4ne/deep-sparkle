@@ -1,3 +1,4 @@
+const config = require('../../utilities/env');
 const { clap } = require('../../modules/clap/index');
 const { convert } = require('../../modules/convert/index');
 const { embed } = require('../../modules/embed/index');
@@ -10,7 +11,7 @@ exports.messageHandler = async (message) => {
   }
 
   //only respond in specified channel, if it is indeed specified
-  if (process.env.CHANNEL_ID && message.channel.id !== process.env.CHANNEL_ID) {
+  if (config.CHANNEL_ID && message.channel.id !== config.CHANNEL_ID) {
     return;
   }
 

@@ -1,4 +1,5 @@
 const axios = require('axios');
+const config = require('../../utilities/env');
 const { translate } = require('./index');
 
 jest.mock('axios');
@@ -33,8 +34,8 @@ describe('translate', () => {
   });
 
   test('should return error if API not configured', async() => {
-    delete process.env.TRANSLATION_API_URL;
-    delete process.env.TRANSLATION_API_KEY;
+    delete config.TRANSLATION_API_URL;
+    delete config.TRANSLATION_API_KEY;
     const translation = await translate('en-fr text to translate');
     expect(translation).toBe('Cannot translate at this time.');
   });

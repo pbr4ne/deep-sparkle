@@ -1,4 +1,4 @@
-require('dotenv').config({path: '.env' + (process.env.NODE_ENV ? '.' + process.env.NODE_ENV : '')});
+const config = require('../../utilities/env');
 const axios = require('axios');
 
 const log4js = require('log4js');
@@ -9,11 +9,9 @@ log4js.configure({
 const logger = log4js.getLogger('translation');
 
 exports.translate = (content) => {
-  const translationAPIURL = process.env.TRANSLATION_API_URL;
-  const translationAPIKey = process.env.TRANSLATION_API_KEY;
   const translateEndpoint = '/v3/translate?version=2018-05-01';
 
-  if (!translationAPIURL || !translationAPIKey) {
+  if (!config.TRANSLATION_API_URL || !config.TRANSLATION_API_KEY) {
     logger.error('TRANSLATION_API_URL and TRANSLATION_API_KEY need to be set in .env');
     return Promise.resolve('Cannot translate at this time.');
   }
@@ -23,7 +21,7 @@ exports.translate = (content) => {
   logger.info(`translating to/from [${model_id}] text [${text}]`);
 
   return axios.post(
-    translationAPIURL + translateEndpoint,
+    config.TRANSLATION_API_URL + translateEndpoint,
     {
       text,
       model_id,
@@ -31,7 +29,7 @@ exports.translate = (content) => {
     {
       auth: {
         username: 'apikey',
-        password: translationAPIKey
+        password: config.TRANSLATION_API_KEY
       }
     }
   ).then(response => {

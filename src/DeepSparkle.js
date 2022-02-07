@@ -1,4 +1,4 @@
-require('dotenv').config({path: '.env' + (process.env.NODE_ENV ? '.' + process.env.NODE_ENV : '')});
+const config = require('./utilities/env');
 const { Client, Intents } = require('discord.js');
 const { messageHandler } = require('./handlers/messageHandler/index');
 const { readyHandler } = require('./handlers/readyHandler/index');
@@ -22,4 +22,4 @@ bot.on('messageCreate', messageHandler);
 process.on('uncaughtException', error => logger.error('Uncaught Error', error));
 process.on('unhandledRejection', error => logger.error('Unhandled Promise Rejection', error));
 
-bot.login(process.env.CLIENT_TOKEN);
+bot.login(config.CLIENT_TOKEN);
