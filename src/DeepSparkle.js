@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({path: '.env' + (process.env.NODE_ENV ? '.' + process.env.NODE_ENV : '')});
 const { Client, Intents } = require('discord.js');
 const { messageHandler } = require('./handlers/messageHandler/index');
 const { readyHandler } = require('./handlers/readyHandler/index');
