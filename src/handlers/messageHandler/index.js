@@ -16,6 +16,7 @@ exports.messageHandler = async (message) => {
   }
 
   const content = message.content.toLowerCase();
+  const contentOriginal = message.content;
 
   //convert
   if (content.includes('convert')) {
@@ -26,12 +27,12 @@ exports.messageHandler = async (message) => {
   }
   //clap
   if (content.startsWith('ds clap')) {
-    const clapResponse = clap(content.slice('ds clap '.length));
+    const clapResponse = clap(contentOriginal.slice('ds clap '.length));
     message.channel.send(clapResponse);
   }
   //translate
   if (content.startsWith('ds translate')) {
-    translate(content.slice('ds translate '.length)).then((translateResponse) => {
+    translate(contentOriginal.slice('ds translate '.length)).then((translateResponse) => {
       message.channel.send({ embeds: [embed(translateResponse)] });
     });
   }
