@@ -1,4 +1,8 @@
+const axios = require('axios');
 const { messageHandler } = require('./index');
+
+jest.mock('axios');
+
 //todo - this should test that it calls the exported functions instead
 describe('messageHandler', () => {
   const message = ({
@@ -31,6 +35,22 @@ describe('messageHandler', () => {
     message.content = 'ds clap test test';
     await messageHandler(message);
     expect(message.channel.send).toHaveBeenCalledWith('test 👏 test');
+  });
+
+  test('should send translate', async () => {
+    axios.post.mockImplementationOnce(() => Promise.resolve({
+      data: {
+        translations: [
+          {
+            translation: 'Texte à traduire'
+          },
+        ],
+      },
+    }));
+    message.content = 'ds translate en-fr text to translate';
+    await messageHandler(message);
+    await new Promise(process.nextTick);
+    expect(message.channel.send).toHaveBeenCalledWith('Texte à traduire');
   });
 
   test('should send nothing', async () => {
