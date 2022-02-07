@@ -25,16 +25,22 @@ describe('messageHandler', () => {
     jest.clearAllMocks();
   });
 
+  test('should send clap', async () => {
+    message.content = 'ds clap test test';
+    await messageHandler(message);
+    expect(message.channel.send).toHaveBeenCalledWith('test 👏 test');
+  });
+
   test('should send convert', async () => {
     message.content = 'convert 10m';
     await messageHandler(message);
     expect(message.channel.send).toHaveBeenCalledWith(expect.objectContaining({embeds: expect.any(Array)}));
   });
 
-  test('should send clap', async () => {
-    message.content = 'ds clap test test';
+  test('should fix table', async () => {
+    message.content = '(╯°□°)╯︵ ┻━┻';
     await messageHandler(message);
-    expect(message.channel.send).toHaveBeenCalledWith('test 👏 test');
+    expect(message.channel.send).toHaveBeenCalledWith('┬──┬ ノ( ゜-゜ノ)');
   });
 
   test('should send translate', async () => {
