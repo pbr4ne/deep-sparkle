@@ -1,6 +1,6 @@
 const { embed } = require('./index');
-const Field = require('../shared/field');
-const Response = require('../shared/response');
+const Field = require('../../shared/field');
+const Response = require('../../shared/response');
 
 describe('embed', () => {
   test('should build correct MessageEmbed if Response provided', () => {
