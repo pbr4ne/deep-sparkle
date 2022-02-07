@@ -32,7 +32,7 @@ exports.messageHandler = async (message) => {
   //translate
   if (content.startsWith('ds translate')) {
     translate(content.slice('ds translate '.length)).then((translateResponse) => {
-      message.channel.send(translateResponse);
+      message.channel.send({ embeds: [embed(translateResponse)] });
     });
   }
 };

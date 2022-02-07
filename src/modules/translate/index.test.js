@@ -20,7 +20,9 @@ describe('translate', () => {
       },
     }));
     const translation = await translate('en-fr text to translate');
-    expect(translation).toBe('Texte à traduire');
+    expect(translation.fields.length).toBe(1);
+    expect(translation.fields[0].label).toBe('Translation');
+    expect(translation.fields[0].content).toBe('Texte à traduire');
   });
 
   test('should return error if invalid languages', async() => {
@@ -30,13 +32,17 @@ describe('translate', () => {
       },
     }));
     const translation = await translate('aa-bb text to translate');
-    expect(translation).toBe('Cannot translate that language combination.');
+    expect(translation.fields.length).toBe(1);
+    expect(translation.fields[0].label).toBe('Translation Failed');
+    expect(translation.fields[0].content).toBe('Cannot translate that language combination.');
   });
 
   test('should return error if API not configured', async() => {
     delete config.TRANSLATION_API_URL;
     delete config.TRANSLATION_API_KEY;
     const translation = await translate('en-fr text to translate');
-    expect(translation).toBe('Cannot translate at this time.');
+    expect(translation.fields.length).toBe(1);
+    expect(translation.fields[0].label).toBe('Translation Failed');
+    expect(translation.fields[0].content).toBe('Cannot translate at this time.');
   });
 });

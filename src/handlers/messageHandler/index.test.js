@@ -50,7 +50,7 @@ describe('messageHandler', () => {
     message.content = 'ds translate en-fr text to translate';
     await messageHandler(message);
     await new Promise(process.nextTick);
-    expect(message.channel.send).toHaveBeenCalledWith('Texte à traduire');
+    expect(message.channel.send).toHaveBeenCalledWith(expect.objectContaining({embeds: expect.any(Array)}));
   });
 
   test('should send nothing', async () => {
