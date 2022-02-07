@@ -18,17 +18,17 @@ exports.messageHandler = async (message) => {
   const content = message.content.toLowerCase();
   const contentOriginal = message.content;
 
+  //clap
+  if (content.startsWith('ds clap')) {
+    const clapResponse = clap(contentOriginal.slice('ds clap '.length));
+    message.channel.send(clapResponse);
+  }
   //convert
   if (content.includes('convert')) {
     const convertResponse = embed(convert(content));
     if (convertResponse) {
       message.channel.send({ embeds: [convertResponse] });
     }
-  }
-  //clap
-  if (content.startsWith('ds clap')) {
-    const clapResponse = clap(contentOriginal.slice('ds clap '.length));
-    message.channel.send(clapResponse);
   }
   //translate
   if (content.startsWith('ds translate')) {
