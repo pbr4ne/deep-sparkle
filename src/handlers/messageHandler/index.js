@@ -2,6 +2,7 @@ const config = require('../../utilities/env');
 const { clap } = require('../../modules/clap/index');
 const { convert } = require('../../modules/convert/index');
 const { embed } = require('../../modules/embed/index');
+const { tableflip } = require('../../modules/tableflip/index');
 const { translate } = require('../../modules/translate/index');
 
 exports.messageHandler = async (message) => {
@@ -29,6 +30,10 @@ exports.messageHandler = async (message) => {
     if (convertResponse) {
       message.channel.send({ embeds: [convertResponse] });
     }
+  }
+  //tableflip
+  if (content.includes('┻') || (content.includes('https://tenor.com') && content.includes('table'))) {
+    message.channel.send(tableflip());
   }
   //translate
   if (content.startsWith('ds translate')) {
