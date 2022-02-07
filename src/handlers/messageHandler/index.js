@@ -19,6 +19,11 @@ exports.messageHandler = async (message) => {
   const content = message.content.toLowerCase();
   const contentOriginal = message.content;
 
+  //test
+  if (content === 'ds test') {
+    message.channel.send('test');
+  }
+
   //clap
   if (content.startsWith('ds clap')) {
     const clapResponse = clap(contentOriginal.slice('ds clap '.length));
