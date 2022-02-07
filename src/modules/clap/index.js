@@ -1,9 +1,4 @@
-const log4js = require('log4js');
-log4js.configure({
-  appenders: { clap: { type: 'file', filename: 'logs/deep-sparkle.log' } },
-  categories: { default: { appenders: ['clap'], level: 'info' } }
-});
-const logger = log4js.getLogger('clap');
+const logger = require('../../utilities/log')('clap');
 
 exports.clap = (content) => {
   const clapWords = content.split(' ');

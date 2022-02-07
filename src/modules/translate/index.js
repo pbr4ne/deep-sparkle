@@ -1,12 +1,6 @@
+const logger = require('../../utilities/log')('translate');
 const config = require('../../utilities/env');
 const axios = require('axios');
-
-const log4js = require('log4js');
-log4js.configure({
-  appenders: { translation: { type: 'file', filename: 'logs/deep-sparkle.log' } },
-  categories: { default: { appenders: ['translation'], level: 'info' } }
-});
-const logger = log4js.getLogger('translation');
 
 exports.translate = (content) => {
   const translateEndpoint = '/v3/translate?version=2018-05-01';

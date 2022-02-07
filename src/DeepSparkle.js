@@ -1,14 +1,8 @@
 const config = require('./utilities/env');
+const logger = require('./utilities/log')('deepSparkle');
 const { Client, Intents } = require('discord.js');
 const { messageHandler } = require('./handlers/messageHandler/index');
 const { readyHandler } = require('./handlers/readyHandler/index');
-
-const log4js = require('log4js');
-log4js.configure({
-  appenders: { deepSparkle: { type: 'file', filename: 'logs/deep-sparkle.log' } },
-  categories: { default: { appenders: ['deepSparkle'], level: 'info' } }
-});
-const logger = log4js.getLogger('deepSparkle');
 
 const intents = [
   Intents.FLAGS.GUILDS,

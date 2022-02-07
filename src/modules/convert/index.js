@@ -1,13 +1,7 @@
+const logger = require('../../utilities/log')('convert');
 const convert = require('convert-units');
 const Response = require('../../shared/response');
 const Field = require('../../shared/field');
-
-const log4js = require('log4js');
-log4js.configure({
-  appenders: { conversion: { type: 'file', filename: 'logs/deep-sparkle.log' } },
-  categories: { default: { appenders: ['conversion'], level: 'info' } }
-});
-const logger = log4js.getLogger('conversion');
 
 const NUMBER_MATCH = '[+-]?\\d+(\\.\\d+)*';
 const NUMBER_REGEX = new RegExp(`(${NUMBER_MATCH})`,'g');
