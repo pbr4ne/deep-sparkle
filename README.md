@@ -16,6 +16,7 @@ Please see [credits](credits.md) for a list of all dependencies and their licens
 [convert-units](https://github.com/convert-units/convert-units) - Utility to convert between quantities in different units<br>
 [log4js-node](https://github.com/log4js-node/log4js-node) - Logging framework<br>
 [dotenv](https://github.com/motdotla/dotenv) - Load environment variables
+[github-readme-stats](https://github.com/anuraghazra/github-readme-stats) - Fancy github stats<br>
 
 ## Stats
 
