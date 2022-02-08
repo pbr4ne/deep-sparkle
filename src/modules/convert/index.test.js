@@ -14,23 +14,23 @@ describe('conversions', () => {
   ['f', 'F', '°f', '°F', '° f', '° F', 'deg f', 'deg F', 'degrees f', 'degrees F'].forEach(unit => conversionTestArray.push([10, unit, -12, 'C', 'F', 'degrees celsius']));
 
   //no leading spaces
-  test.each(conversionTestArray)('should convert %s%s to %s %s', (inputAmount, inputUnit, expectedAmount, expectedOutputUnit, expectedInputUnit, expectedOutputUnitLong) => {
-    const conversion = convert(`${inputAmount}${inputUnit}`);
+  test.each(conversionTestArray)('should convert %s%s to %s %s (no leading spaces)', async (inputAmount, inputUnit, expectedAmount, expectedOutputUnit, expectedInputUnit, expectedOutputUnitLong) => {
+    const conversion = await convert(`${inputAmount}${inputUnit}`);
     expect(conversion.fields.length).toBe(1);
     expect(conversion.fields[0].label).toBe(`Converted to ${expectedOutputUnitLong}`);
     expect(conversion.fields[0].content).toBe(`${inputAmount} ${expectedInputUnit} = ${expectedAmount} ${expectedOutputUnit}`);
   });
 
   //leading spaces
-  test.each(conversionTestArray)('should convert %s %s to %s %s', (inputAmount, inputUnit, expectedAmount, expectedOutputUnit, expectedInputUnit, expectedOutputUnitLong) => {
-    const conversion = convert(`${inputAmount} ${inputUnit}`);
+  test.each(conversionTestArray)('should convert %s %s to %s %s (leading spaces)', async (inputAmount, inputUnit, expectedAmount, expectedOutputUnit, expectedInputUnit, expectedOutputUnitLong) => {
+    const conversion = await convert(`${inputAmount} ${inputUnit}`);
     expect(conversion.fields.length).toBe(1);
     expect(conversion.fields[0].label).toBe(`Converted to ${expectedOutputUnitLong}`);
     expect(conversion.fields[0].content).toBe(`${inputAmount} ${expectedInputUnit} = ${expectedAmount} ${expectedOutputUnit}`);
   });
 
-  test('should convert multiple', () => {
-    const conversion = convert('10ft 10m 10c');
+  test('should convert multiple', async () => {
+    const conversion = await convert('10ft 10m 10c');
     expect(conversion.fields.length).toBe(3);
     expect(conversion.fields[0].label).toBe('Converted to meters');
     expect(conversion.fields[0].content).toBe('10 ft = 3.05 m');
@@ -40,7 +40,8 @@ describe('conversions', () => {
     expect(conversion.fields[2].content).toBe('10 C = 50 F');
   });
 
-  test('should not convert if nothing to convert', () => {
-    expect(convert('hello').fields.length).toBe(0);
+  test('should not convert if nothing to convert', async () => {
+    const conversion = await convert('hello');
+    expect(conversion.fields.length).toBe(0);
   });
 });

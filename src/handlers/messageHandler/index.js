@@ -30,10 +30,12 @@ exports.messageHandler = async (message) => {
   }
   //convert
   if (content.includes('convert')) {
-    const convertResponse = embed(convert(content));
-    if (convertResponse) {
-      message.channel.send({ embeds: [convertResponse] });
-    }
+    convert(content).then(convertResponse => {
+      const convertEmbed = embed(convertResponse);
+      if (convertEmbed) {
+        message.channel.send({ embeds: [convertEmbed] });
+      }
+    });
   }
   //tableflip
   if (content.includes('┻') || (content.includes('https://tenor.com') && content.includes('table'))) {

@@ -57,26 +57,29 @@ const resetRegex = (regex) => {
 };
 
 exports.convert = (content) => {
-  const fieldArray = converters
-    .filter(converter => {
-      resetRegex(converter.regex);
-      return converter.regex.exec(content);
-    })
-    .map(converter => {
-      resetRegex(converter.regex);
-      const match = converter.regex.exec(content);
-      if (match) {
-        const fromNumber = Number.parseFloat(NUMBER_REGEX.exec(match)[0]);
-        const convertedValue = convert(fromNumber)
-          .from(converter.fromUnit)
-          .to(converter.toUnit)
-          .toFixed(converter.decimalDigits != undefined ? converter.decimalDigits : 2);
-        const label = `Converted to ${convert().list().find(f => f.abbr == converter.toUnit).plural.toLowerCase()}`;
-        const content = `${fromNumber} ${converter.fromUnit} = ${convertedValue} ${converter.toUnit}`;
-        logger.info(`${label}/${content}`);
-        return new Field(label, content);
-      }
-    });
+  return new Promise((resolve) => {
+    const fieldArray = converters
+      .filter(converter => {
+        resetRegex(converter.regex);
+        return converter.regex.exec(content);
+      })
+      .map(converter => {
+        resetRegex(converter.regex);
+        const match = converter.regex.exec(content);
+        if (match) {
+          const fromNumber = Number.parseFloat(NUMBER_REGEX.exec(match)[0]);
+          const convertedValue = convert(fromNumber)
+            .from(converter.fromUnit)
+            .to(converter.toUnit)
+            .toFixed(converter.decimalDigits != undefined ? converter.decimalDigits : 2);
+          const label = `Converted to ${convert().list().find(f => f.abbr == converter.toUnit).plural.toLowerCase()}`;
+          const content = `${fromNumber} ${converter.fromUnit} = ${convertedValue} ${converter.toUnit}`;
+          logger.info(`${label}/${content}`);
+          return new Field(label, content);
+        }
+      });
 
-  return new Response(fieldArray);
+    resolve(new Response(fieldArray));
+  });
+
 };

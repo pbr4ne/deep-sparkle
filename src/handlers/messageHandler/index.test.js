@@ -100,8 +100,7 @@ describe('messageHandler', () => {
       const command = 'ds clap';
       const clapInput = 'test test';
       const clapOutput = 'test 👏 test';
-      const clapResponse = Promise.resolve(clapOutput);
-      clap.mockImplementationOnce(() => clapResponse);
+      clap.mockImplementationOnce(() => Promise.resolve(clapOutput));
 
       message.content = `${command} ${clapInput}`;
       await messageHandler(message);
@@ -125,7 +124,7 @@ describe('messageHandler', () => {
       const response = new Response(new Field('testLabel', 'testContent'));
       const messageEmbed = new MessageEmbed();
       messageEmbed.addField('testLabel', 'testContent');
-      convert.mockImplementationOnce(() => response);
+      convert.mockImplementationOnce(() => Promise.resolve(response));
       embed.mockImplementationOnce(() => messageEmbed);
 
       message.content = input;
