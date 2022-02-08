@@ -99,14 +99,15 @@ describe('messageHandler', () => {
     test('should send clap when command is ds clap', async () => {
       const command = 'ds clap';
       const clapInput = 'test test';
-      const clapResponse = 'test 👏 test';
+      const clapOutput = 'test 👏 test';
+      const clapResponse = Promise.resolve(clapOutput);
       clap.mockImplementationOnce(() => clapResponse);
 
       message.content = `${command} ${clapInput}`;
       await messageHandler(message);
 
       expect(clap).toHaveBeenCalledWith(clapInput);
-      expect(message.channel.send).toHaveBeenCalledWith(clapResponse);
+      expect(message.channel.send).toHaveBeenCalledWith(clapOutput);
     });
 
     test('should do nothing when command is not ds clap', async () => {

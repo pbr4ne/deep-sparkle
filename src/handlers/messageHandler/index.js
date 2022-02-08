@@ -26,8 +26,7 @@ exports.messageHandler = async (message) => {
 
   //clap
   if (content.startsWith('ds clap')) {
-    const clapResponse = clap(contentOriginal.slice('ds clap '.length));
-    message.channel.send(clapResponse);
+    clap(contentOriginal.slice('ds clap '.length)).then(clapResponse => message.channel.send(clapResponse));
   }
   //convert
   if (content.includes('convert')) {
