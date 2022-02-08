@@ -26,16 +26,17 @@ exports.messageHandler = async (message) => {
 
   //clap
   if (content.startsWith('ds clap')) {
-    clap(contentOriginal.slice('ds clap '.length)).then(clapResponse => message.channel.send(clapResponse));
+    clap(contentOriginal.slice('ds clap '.length))
+      .then(clapResponse => message.channel.send(clapResponse));
   }
   //convert
   if (content.includes('convert')) {
-    convert(content).then(convertResponse => {
-      const convertEmbed = embed(convertResponse);
-      if (convertEmbed) {
-        message.channel.send({ embeds: [convertEmbed] });
-      }
-    });
+    convert(content)
+      .then(convertResponse => {
+        if (convertResponse.fields.length > 0) {
+          message.channel.send({ embeds: [embed(convertResponse)] });
+        }
+      });
   }
   //tableflip
   if (content.includes('┻') || (content.includes('https://tenor.com') && content.includes('table'))) {
@@ -44,8 +45,7 @@ exports.messageHandler = async (message) => {
   }
   //translate
   if (content.startsWith('ds translate')) {
-    translate(contentOriginal.slice('ds translate '.length)).then((translateResponse) => {
-      message.channel.send({ embeds: [embed(translateResponse)] });
-    });
+    translate(contentOriginal.slice('ds translate '.length))
+      .then((translateResponse) => message.channel.send({ embeds: [embed(translateResponse)]}));
   }
 };

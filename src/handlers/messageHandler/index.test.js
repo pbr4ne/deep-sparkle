@@ -121,7 +121,7 @@ describe('messageHandler', () => {
   describe('convert', () => {
     test('should send convert when command is convert', async () => {
       const input = 'convert 10m';
-      const response = new Response(new Field('testLabel', 'testContent'));
+      const response = new Response([new Field('testLabel', 'testContent')]);
       const messageEmbed = new MessageEmbed();
       messageEmbed.addField('testLabel', 'testContent');
       convert.mockImplementationOnce(() => Promise.resolve(response));
