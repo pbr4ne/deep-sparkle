@@ -1,7 +1,8 @@
 const { tableflip } = require('./index');
 
 describe('tableflip', () => {
-  test('should put table back', () => {
-    expect(tableflip('anything')).toBe('┬──┬ ノ( ゜-゜ノ)');
+  test('should put table back', async () => {
+    const tableflipResponse = await tableflip('anything');
+    expect(tableflipResponse).toBe('┬──┬ ノ( ゜-゜ノ)');
   });
 });

@@ -39,7 +39,8 @@ exports.messageHandler = async (message) => {
   }
   //tableflip
   if (content.includes('┻') || (content.includes('https://tenor.com') && content.includes('table'))) {
-    message.channel.send(tableflip());
+    tableflip(content)
+      .then(tableflipResponse => message.channel.send(tableflipResponse));
   }
   //translate
   if (content.startsWith('ds translate')) {

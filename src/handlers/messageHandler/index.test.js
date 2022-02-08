@@ -148,12 +148,12 @@ describe('messageHandler', () => {
   describe('tableflip', () => {
     test('should fix table when table flipped', async () => {
       const input = '(╯°□°)╯︵ ┻━┻';
-      tableflip.mockImplementationOnce(() => 'fix table');
+      tableflip.mockImplementationOnce(() => Promise.resolve('fix table'));
 
       message.content = input;
       await messageHandler(message);
 
-      expect(tableflip).toHaveBeenCalled();
+      expect(tableflip).toHaveBeenCalledWith(input);
       expect(message.channel.send).toHaveBeenCalledWith('fix table');
     });
 
