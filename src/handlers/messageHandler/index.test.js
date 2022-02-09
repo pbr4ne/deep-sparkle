@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const { messageHandler } = require('./index');
+const { birthday } = require('../../modules/birthday/index');
 const { clap } = require('../../modules/clap/index');
 const { convert } = require('../../modules/convert/index');
 const { embed } = require('../../modules/embed/index');
@@ -9,6 +10,7 @@ const Field = require('../../shared/field');
 const Response = require('../../shared/response');
 const config = require('../../utilities/env');
 
+jest.mock('../../modules/birthday/index');
 jest.mock('../../modules/clap/index');
 jest.mock('../../modules/convert/index');
 jest.mock('../../modules/embed/index');
@@ -92,6 +94,21 @@ describe('messageHandler', () => {
       await messageHandler(message);
 
       expect(message.channel.send).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('birthday', () => {
+    test('should send yey when command is ds birthday', async () => {
+      const command = 'ds birthday';
+      const birthdayInput = 'test';
+      const birthdayOutput = 'yey';
+      birthday.mockImplementationOnce(() => Promise.resolve(birthdayOutput));
+
+      message.content = `${command} ${birthdayInput}`;
+      await messageHandler(message);
+
+      expect(birthday).toHaveBeenCalledWith(birthdayInput);
+      expect(message.channel.send).toHaveBeenCalledWith(birthdayOutput);
     });
   });
 

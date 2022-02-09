@@ -1,4 +1,5 @@
 const config = require('../../utilities/env');
+const { birthday } = require('../../modules/birthday/index');
 const { clap } = require('../../modules/clap/index');
 const { convert } = require('../../modules/convert/index');
 const { embed } = require('../../modules/embed/index');
@@ -24,6 +25,11 @@ exports.messageHandler = async (message) => {
     message.channel.send('test');
   }
 
+  //birthday
+  if (content.startsWith('ds birthday')) {
+    birthday(content.slice('ds birthday '.length))
+      .then(birthdayResponse => message.channel.send(birthdayResponse));
+  }
   //clap
   if (content.startsWith('ds clap')) {
     clap(contentOriginal.slice('ds clap '.length))
