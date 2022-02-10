@@ -1,7 +1,10 @@
 # Deep Sparkle
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=pbr4ne_deep-sparkle&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=pbr4ne_deep-sparkle)
+![GitHub](https://img.shields.io/github/license/pbr4ne/deep-sparkle)
+![Sparkle Depth](https://img.shields.io/badge/sparkle--depth-DEEP-F012BE)
 
 A discord bot.
 
