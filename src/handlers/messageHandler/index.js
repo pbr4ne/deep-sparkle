@@ -7,8 +7,8 @@ const { tableflip } = require('../../modules/tableflip/index');
 const { translate } = require('../../modules/translate/index');
 
 exports.messageHandler = async (message) => {
-  //don't respond to my own message
-  if (message.client.user.id === message.author.id) {
+  //don't respond to my own message or another bot's message
+  if (message.client.user.id === message.author.id || message.author.bot) {
     return;
   }
 

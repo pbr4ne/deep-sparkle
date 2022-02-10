@@ -31,7 +31,7 @@ describe('messageHandler', () => {
     content: '',
     author: {
       id: '456',
-      bot: false, //todo - DS should not respond to bots
+      bot: false,
     },
   });
 
@@ -39,6 +39,7 @@ describe('messageHandler', () => {
     jest.clearAllMocks();
     message.client.user.id = '123';
     message.author.id = '456';
+    message.author.bot = false;
     config.CHANNEL_ID = '111';
     message.channel.id = '111';
   });
@@ -47,6 +48,7 @@ describe('messageHandler', () => {
     test('should respond to messages from someone else', async () => {
       message.client.user.id = '123';
       message.author.id = '456';
+      message.author.bot = false;
 
       message.content = 'ds test';
       await messageHandler(message);
@@ -57,6 +59,17 @@ describe('messageHandler', () => {
     test('should ignore messages from self', async() => {
       message.author.id = '789';
       message.client.user.id = '789';
+
+      message.content = 'ds test';
+      await messageHandler(message);
+
+      expect(message.channel.send).not.toHaveBeenCalled();
+    });
+
+    test('should ignore messages from bots', async() => {
+      message.author.id = '789';
+      message.client.user.id = '789';
+      message.author.bot = true;
 
       message.content = 'ds test';
       await messageHandler(message);
