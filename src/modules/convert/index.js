@@ -1,5 +1,6 @@
 const logger = require('../../utilities/log')('convert');
 const convert = require('convert-units');
+const ConverterType = require('./converterType');
 const Response = require('../../shared/response');
 const Field = require('../../shared/field');
 
@@ -7,49 +8,18 @@ const NUMBER_MATCH = '[+-]?\\d+(\\.\\d+)*';
 const NUMBER_REGEX = new RegExp(`(${NUMBER_MATCH})`,'g');
 const regex_template = expression => `(^| )(${NUMBER_MATCH})\\s?(${expression})($|[ ,.:?!])`;
 
-const converters = [{
-  regex: new RegExp(regex_template('\'|’|ft|feet'), 'g'),
-  fromUnit: 'ft',
-  toUnit: 'm',
-},{
-  regex: new RegExp(regex_template('m|metre|metres|meter|meters'),'g'),
-  fromUnit: 'm',
-  toUnit: 'ft',
-},{
-  regex: new RegExp(regex_template('cm|cms|centimetre|centimetres|centimeters|centimeters'),'g'),
-  fromUnit: 'cm',
-  toUnit: 'in',
-},{
-  regex: new RegExp(regex_template('"|”|inch|inches'),'g'),
-  fromUnit: 'in',
-  toUnit: 'cm',
-},{
-  regex: new RegExp(regex_template('km|kms|kilometre|kilometres|kilometer|kilometers'),'g'),
-  fromUnit: 'km',
-  toUnit: 'mi',
-},{
-  regex: new RegExp(regex_template('mi|mis|mile|miles'),'g'),
-  fromUnit: 'mi',
-  toUnit: 'km',
-},{
-  regex: new RegExp(regex_template('kg|kgs|kilo|kilos|kilograms'),'g'),
-  fromUnit: 'kg',
-  toUnit: 'lb',
-},{
-  regex: new RegExp(regex_template('lb|lbs|pound|pounds'),'g'),
-  fromUnit: 'lb',
-  toUnit: 'kg',
-},{
-  regex: new RegExp(regex_template('°?º?\\s?(degrees)?\\s?(deg)?\\s?([Cc])'),'g'),
-  fromUnit: 'C',
-  toUnit: 'F',
-  decimalDigits: 0,
-},{
-  regex: new RegExp(regex_template('°?º?\\s?(degrees)?\\s?(deg)?\\s?([Ff])'),'g'),
-  fromUnit: 'F',
-  toUnit: 'C',
-  decimalDigits: 0,
-}];
+const converters = [
+  new ConverterType(new RegExp(regex_template('\'|’|ft|feet'), 'g'), 'ft', 'm'),
+  new ConverterType(new RegExp(regex_template('m|metre|metres|meter|meters'),'g'), 'm', 'ft'),
+  new ConverterType(new RegExp(regex_template('cm|cms|centimetre|centimetres|centimeters|centimeters'),'g'), 'cm', 'in'),
+  new ConverterType(new RegExp(regex_template('"|”|inch|inches'),'g'), 'in', 'cm'),
+  new ConverterType(new RegExp(regex_template('km|kms|kilometre|kilometres|kilometer|kilometers'),'g'), 'km', 'mi'),
+  new ConverterType(new RegExp(regex_template('mi|mis|mile|miles'),'g'), 'mi', 'km'),
+  new ConverterType(new RegExp(regex_template('kg|kgs|kilo|kilos|kilograms'),'g'), 'kg', 'lb'),
+  new ConverterType(new RegExp(regex_template('lb|lbs|pound|pounds'),'g'), 'lb', 'kg'),
+  new ConverterType(new RegExp(regex_template('°?º?\\s?(degrees)?\\s?(deg)?\\s?([Cc])'),'g'), 'C', 'F', 0),
+  new ConverterType(new RegExp(regex_template('°?º?\\s?(degrees)?\\s?(deg)?\\s?([Ff])'),'g'), 'F', 'C', 0),
+];
 
 const resetRegex = (regex) => {
   regex.lastIndex = 0;
