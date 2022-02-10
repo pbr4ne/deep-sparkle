@@ -72,10 +72,10 @@ exports.convert = (content) => {
             .from(converter.fromUnit)
             .to(converter.toUnit)
             .toFixed(converter.decimalDigits != undefined ? converter.decimalDigits : 2);
-          const label = `Converted to ${convert().list().find(f => f.abbr == converter.toUnit).plural.toLowerCase()}`;
-          const content = `${fromNumber} ${converter.fromUnit} = ${convertedValue} ${converter.toUnit}`;
-          logger.info(`${label}/${content}`);
-          return new Field(label, content);
+          const fieldLabel = `Converted to ${convert().list().find(f => f.abbr == converter.toUnit).plural.toLowerCase()}`;
+          const fieldContent = `${fromNumber} ${converter.fromUnit} = ${convertedValue} ${converter.toUnit}`;
+          logger.info(`${fieldLabel}/${fieldContent}`);
+          return new Field(fieldLabel, fieldContent);
         }
       });
 
