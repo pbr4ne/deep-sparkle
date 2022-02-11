@@ -176,8 +176,19 @@ describe('messageHandler', () => {
   });
 
   describe('tableflip', () => {
-    test('should fix table when table flipped', async () => {
+    test('should fix table when table flipped (emoji)', async () => {
       const input = '(╯°□°)╯︵ ┻━┻';
+      tableflip.mockImplementationOnce(() => Promise.resolve('fix table'));
+
+      message.content = input;
+      await messageHandler(message);
+
+      expect(tableflip).toHaveBeenCalledWith(input);
+      expect(message.channel.send).toHaveBeenCalledWith('fix table');
+    });
+
+    test('should fix table when table flipped (tenor link)', async () => {
+      const input = 'https://tenor.com/tableflip';
       tableflip.mockImplementationOnce(() => Promise.resolve('fix table'));
 
       message.content = input;
