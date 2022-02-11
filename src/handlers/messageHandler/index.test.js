@@ -165,6 +165,19 @@ describe('messageHandler', () => {
       expect(message.channel.send).toHaveBeenCalledWith({embeds: [expect.objectContaining(messageEmbed)]});
     });
 
+    test('should do nothing when no convert found', async () => {
+      const input = 'convert nothing';
+      convert.mockImplementationOnce(() => Promise.resolve(new Response([])));
+
+      message.content = input;
+      await messageHandler(message);
+
+
+      expect(convert).toHaveBeenCalledWith(input);
+      expect(embed).not.toHaveBeenCalled();
+      expect(message.channel.send).not.toHaveBeenCalled();
+    });
+
     test('should do nothing when command is not convert', async () => {
       message.content = 'nothing important';
       await messageHandler(message);
