@@ -36,17 +36,15 @@ exports.convert = (content) => {
       .map(converter => {
         resetRegex(converter.regex);
         const match = converter.regex.exec(content);
-        if (match) {
-          const fromNumber = Number.parseFloat(NUMBER_REGEX.exec(match)[0]);
-          const convertedValue = convert(fromNumber)
-            .from(converter.fromUnit)
-            .to(converter.toUnit)
-            .toFixed(converter.decimalDigits != undefined ? converter.decimalDigits : 2);
-          const fieldLabel = `Converted to ${convert().list().find(f => f.abbr == converter.toUnit).plural.toLowerCase()}`;
-          const fieldContent = `${fromNumber} ${converter.fromUnit} = ${convertedValue} ${converter.toUnit}`;
-          logger.info(`${fieldLabel}/${fieldContent}`);
-          return new Field(fieldLabel, fieldContent);
-        }
+        const fromNumber = Number.parseFloat(NUMBER_REGEX.exec(match)[0]);
+        const convertedValue = convert(fromNumber)
+          .from(converter.fromUnit)
+          .to(converter.toUnit)
+          .toFixed(converter.decimalDigits != undefined ? converter.decimalDigits : 2);
+        const fieldLabel = `Converted to ${convert().list().find(f => f.abbr == converter.toUnit).plural.toLowerCase()}`;
+        const fieldContent = `${fromNumber} ${converter.fromUnit} = ${convertedValue} ${converter.toUnit}`;
+        logger.info(`${fieldLabel}/${fieldContent}`);
+        return new Field(fieldLabel, fieldContent);
       });
 
     resolve(new Response(fieldArray));
