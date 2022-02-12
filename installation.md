@@ -16,7 +16,13 @@ TRANSLATION_API_KEY='<Watson Language Translator API Key>'
 ## Run unit tests
 
 ```
-npm run unit
+npm run test:unit
+```
+
+## Run test coverage report
+
+```
+npm run test:coverage
 ```
 
 ## Run linter

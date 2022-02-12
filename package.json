@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "npx eslint src",
     "start": "node src/DeepSparkle.js",
-    "unit": "jest src --coverage"
+    "test:unit": "jest src",
+    "test:coverage": "jest src --coverage"
   },
   "author": "pbr4ne",
   "license": "MIT",
