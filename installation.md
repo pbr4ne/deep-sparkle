@@ -21,7 +21,7 @@ npm run unit
 
 ## Run linter
 ```
-npx run lint
+npm run lint
 ```
 
 ## Run bot
