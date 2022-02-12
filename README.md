@@ -25,13 +25,7 @@ Please see [credits](credits.md) for a list of all dependencies and their licens
 | [log4js-node](https://github.com/log4js-node/log4js-node) | Logging framework |
 | [dotenv](https://github.com/motdotla/dotenv) | Load environment variables |
 | [axios](https://github.com/axios/axios) | Promise-based HTTP client |
-| [github-readme-stats](https://github.com/anuraghazra/github-readme-stats) | Fancy github stats |
 
-## Stats
-
-[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=pbr4ne&show_icons=true&theme=radical)](https://github.com/anuraghazra/github-readme-stats)
-
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=pbr4ne&theme=radical&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
