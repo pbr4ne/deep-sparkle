@@ -2,7 +2,7 @@ const config = require('../../utilities/env');
 const { birthday } = require('../../modules/birthday');
 const { clap } = require('../../modules/clap');
 const { convert } = require('../../modules/convert');
-const { embed } = require('../../modules/embed');
+const { embed } = require('../../discord/embed');
 const { tableflip } = require('../../modules/tableflip');
 const { translate } = require('../../modules/translate');
 
