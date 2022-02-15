@@ -1,21 +1,21 @@
 const { MessageEmbed } = require('discord.js');
-const { messageHandler } = require('./index');
-const { birthday } = require('../../modules/birthday/index');
-const { clap } = require('../../modules/clap/index');
-const { convert } = require('../../modules/convert/index');
-const { embed } = require('../../modules/embed/index');
-const { tableflip } = require('../../modules/tableflip/index');
-const { translate } = require('../../modules/translate/index');
+const { messageHandler } = require('.');
+const { birthday } = require('../../modules/birthday');
+const { clap } = require('../../modules/clap');
+const { convert } = require('../../modules/convert');
+const { embed } = require('../../modules/embed');
+const { tableflip } = require('../../modules/tableflip');
+const { translate } = require('../../modules/translate');
 const Field = require('../../shared/field');
 const Response = require('../../shared/response');
 const config = require('../../utilities/env');
 
-jest.mock('../../modules/birthday/index');
-jest.mock('../../modules/clap/index');
-jest.mock('../../modules/convert/index');
-jest.mock('../../modules/embed/index');
-jest.mock('../../modules/tableflip/index');
-jest.mock('../../modules/translate/index');
+jest.mock('../../modules/birthday');
+jest.mock('../../modules/clap');
+jest.mock('../../modules/convert');
+jest.mock('../../modules/embed');
+jest.mock('../../modules/tableflip');
+jest.mock('../../modules/translate');
 
 describe('messageHandler', () => {
   const message = ({

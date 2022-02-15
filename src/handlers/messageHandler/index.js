@@ -1,10 +1,10 @@
 const config = require('../../utilities/env');
-const { birthday } = require('../../modules/birthday/index');
-const { clap } = require('../../modules/clap/index');
-const { convert } = require('../../modules/convert/index');
-const { embed } = require('../../modules/embed/index');
-const { tableflip } = require('../../modules/tableflip/index');
-const { translate } = require('../../modules/translate/index');
+const { birthday } = require('../../modules/birthday');
+const { clap } = require('../../modules/clap');
+const { convert } = require('../../modules/convert');
+const { embed } = require('../../modules/embed');
+const { tableflip } = require('../../modules/tableflip');
+const { translate } = require('../../modules/translate');
 
 exports.messageHandler = async (message) => {
   //don't respond to my own message or another bot's message

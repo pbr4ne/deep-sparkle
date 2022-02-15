@@ -1,4 +1,4 @@
-const { readyHandler } = require('./index');
+const { readyHandler } = require('.');
 describe('readyHandler', () => {
   const client = {
     user: {

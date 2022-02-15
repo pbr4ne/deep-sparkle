@@ -1,6 +1,6 @@
 const axios = require('axios');
 const config = require('../../utilities/env');
-const { translate } = require('./index');
+const { translate } = require('.');
 
 jest.mock('axios');
 

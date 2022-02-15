@@ -1,4 +1,4 @@
-const { convert } = require('./index');
+const { convert } = require('.');
 
 describe('conversions', () => {
   const conversionTestArray = new Array();

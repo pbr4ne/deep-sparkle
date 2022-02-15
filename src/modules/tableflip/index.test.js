@@ -1,4 +1,4 @@
-const { tableflip } = require('./index');
+const { tableflip } = require('.');
 
 describe('tableflip', () => {
   test('should put table back', async () => {

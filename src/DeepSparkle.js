@@ -1,8 +1,8 @@
 const config = require('./utilities/env');
 const logger = require('./utilities/log')('deepSparkle');
 const { Client, Intents } = require('discord.js');
-const { messageHandler } = require('./handlers/messageHandler/index');
-const { readyHandler } = require('./handlers/readyHandler/index');
+const { messageHandler } = require('./handlers/messageHandler');
+const { readyHandler } = require('./handlers/readyHandler');
 
 const intents = [
   Intents.FLAGS.GUILDS,

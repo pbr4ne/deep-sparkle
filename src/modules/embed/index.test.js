@@ -1,4 +1,4 @@
-const { embed } = require('./index');
+const { embed } = require('.');
 const Field = require('../../shared/field');
 const Response = require('../../shared/response');
 

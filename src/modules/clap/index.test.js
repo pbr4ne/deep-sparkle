@@ -1,4 +1,4 @@
-const { clap } = require('./index');
+const { clap } = require('.');
 
 describe('clap', () => {
   test('should split sentence with clap emoji', async () => {

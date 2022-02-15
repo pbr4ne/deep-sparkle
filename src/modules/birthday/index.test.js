@@ -1,4 +1,4 @@
-const { birthday } = require('./index');
+const { birthday } = require('.');
 
 describe('birthday', () => {
   test('yey', async () => {
