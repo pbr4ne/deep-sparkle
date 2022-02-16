@@ -128,8 +128,8 @@ describe('messageHandler', () => {
   describe('clap', () => {
     test('should send clap when command is ds clap', async () => {
       const command = 'ds clap';
-      const clapInput = 'test test';
-      const clapOutput = 'test 👏 test';
+      const clapInput = 'Test Test';
+      const clapOutput = 'Test 👏 Test';
       clap.mockImplementationOnce(() => Promise.resolve(clapOutput));
 
       message.content = `${command} ${clapInput}`;
@@ -225,7 +225,7 @@ describe('messageHandler', () => {
   describe('translate', () => {
     test('should send translate when command is ds translate', async () => {
       const command = 'ds translate';
-      const translateInput = 'ds translate en-fr text';
+      const translateInput = 'en-fr Text';
       const response = new Response(new Field('testLabel', 'testContent'));
       const messageEmbed = new MessageEmbed();
       messageEmbed.addField('testLabel', 'testContent');
