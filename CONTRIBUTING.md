@@ -1,3 +1,7 @@
+# Contributing to Deep Sparkle
+
+Please feel free to open a pull request and contribute!
+
 ## Project setup
 ```
 npm install

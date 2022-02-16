@@ -8,13 +8,13 @@
 
 A discord bot.
 
-## Installation
+## Contributing
 
-Instructions to run the bot locally can be found [here](installation.md).
+Contributions very welcome! Instructions to run the bot locally can be found [here](CONTRIBUTING.md).
 
 ## Credits
 
-Please see [credits](credits.md) for a list of all dependencies and their licenses.
+Please see [credits](CREDITS.md) for a list of all dependencies and their licenses.
 
 ## Special callout to
 
