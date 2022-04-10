@@ -5,6 +5,7 @@ const { convert } = require('../../modules/convert');
 const { embed } = require('../../discord/embed');
 const { tableflip } = require('../../modules/tableflip');
 const { translate } = require('../../modules/translate');
+const { compare } = require('../../modules/compare');
 
 exports.messageHandler = async (message) => {
   //don't respond to my own message or another bot's message
@@ -43,6 +44,13 @@ exports.messageHandler = async (message) => {
           message.channel.send({ embeds: [embed(convertResponse)] });
         }
       });
+  }
+  //question
+  if (content.startsWith('ds ') && content.endsWith('?')) {
+    if (content.includes(' or ')) {
+      compare(content.slice('ds '.length, content.length - 1))
+        .then(compareResponse => message.channel.send(compareResponse));
+    }
   }
   //tableflip
   if (content.includes('┻') || (content.includes('https://tenor.com') && content.includes('table'))) {

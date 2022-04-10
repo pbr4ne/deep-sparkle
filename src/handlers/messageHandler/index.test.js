@@ -2,6 +2,7 @@ const { MessageEmbed } = require('discord.js');
 const { messageHandler } = require('.');
 const { birthday } = require('../../modules/birthday');
 const { clap } = require('../../modules/clap');
+const { compare } = require('../../modules/compare');
 const { convert } = require('../../modules/convert');
 const { embed } = require('../../discord/embed');
 const { tableflip } = require('../../modules/tableflip');
@@ -12,6 +13,7 @@ const config = require('../../utilities/env');
 
 jest.mock('../../modules/birthday');
 jest.mock('../../modules/clap');
+jest.mock('../../modules/compare');
 jest.mock('../../modules/convert');
 jest.mock('../../discord/embed');
 jest.mock('../../modules/tableflip');
@@ -184,6 +186,52 @@ describe('messageHandler', () => {
 
       expect(convert).not.toHaveBeenCalled();
       expect(embed).not.toHaveBeenCalled();
+      expect(message.channel.send).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('question', () => {
+    test('should compare when asked this or that', async () => {
+      const response = 'that';
+      compare.mockImplementationOnce(() => Promise.resolve(response));
+
+      message.content = 'ds this or that?';
+      await messageHandler(message);
+
+      expect(compare).toHaveBeenCalledWith('this or that');
+      expect(message.channel.send).toHaveBeenCalledWith(response);
+    });
+
+    test('should do nothing when no question mark', async () => {
+      const response = 'that';
+      compare.mockImplementationOnce(() => Promise.resolve(response));
+
+      message.content = 'ds this or that';
+      await messageHandler(message);
+
+      expect(compare).not.toHaveBeenCalled();
+      expect(message.channel.send).not.toHaveBeenCalled();
+    });
+
+    test('should do nothing when no "ds"', async () => {
+      const response = 'that';
+      compare.mockImplementationOnce(() => Promise.resolve(response));
+
+      message.content = 'this or that?';
+      await messageHandler(message);
+
+      expect(compare).not.toHaveBeenCalled();
+      expect(message.channel.send).not.toHaveBeenCalled();
+    });
+
+    test('should do nothing when no "or"', async () => {
+      const response = 'that';
+      compare.mockImplementationOnce(() => Promise.resolve(response));
+
+      message.content = 'ds this that?';
+      await messageHandler(message);
+
+      expect(compare).not.toHaveBeenCalled();
       expect(message.channel.send).not.toHaveBeenCalled();
     });
   });
