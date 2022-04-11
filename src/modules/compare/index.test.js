@@ -4,17 +4,26 @@ describe('compare', () => {
   const separatorTypes = ['or', 'vs'];
   
   const testNumbers = [
+    // compare two items
+    { numberToCompare: 2, randomResult: 0, expectedIndex: 0},
     { numberToCompare: 2, randomResult: 0.49, expectedIndex: 0},
-    { numberToCompare: 2, randomResult: 0.51, expectedIndex: 1},
-    { numberToCompare: 3, randomResult: 0.32, expectedIndex: 0},
+    { numberToCompare: 2, randomResult: 0.50, expectedIndex: 1},
+    { numberToCompare: 2, randomResult: 0.99, expectedIndex: 1},
+    // compare three items
+    { numberToCompare: 3, randomResult: 0, expectedIndex: 0},
+    { numberToCompare: 3, randomResult: 0.33, expectedIndex: 0},
     { numberToCompare: 3, randomResult: 0.34, expectedIndex: 1},
+    { numberToCompare: 3, randomResult: 0.66, expectedIndex: 1},
     { numberToCompare: 3, randomResult: 0.67, expectedIndex: 2},
+    { numberToCompare: 3, randomResult: 0.99, expectedIndex: 2},
+    // compare four items
+    { numberToCompare: 4, randomResult: 0.26, expectedIndex: 1},
   ];
 
   const wordComparisons = [
-    { description: 'one character', wordList: ['a', 'b', 'c'] },
-    { description: 'one word', wordList: ['radish', 'sheep', 'bucket'] },
-    { description: 'two words', wordList: ['x axis', 'y axis', 'z axis'] },
+    { description: 'one character', wordList: ['a', 'b', 'c', 'd'] },
+    { description: 'one word', wordList: ['radish', 'sheep', 'bucket', 'slug'] },
+    { description: 'two words', wordList: ['x axis', 'y axis', 'z axis', 'n axis'] },
   ];
 
   const successTestCases = wordComparisons.flatMap(wordComparison => 
