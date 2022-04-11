@@ -2,14 +2,17 @@ const logger = require('../../utilities/log')('compare');
 
 exports.compare = (content) => {
   return new Promise((resolve, reject) => {
-    let wordsInMessage = content.replace(/\s+/g, ' ').trim();
-    wordsInMessage = wordsInMessage.split(' or ');
+    // replace whitespace with a space and trim
+    let sanitizedContent = content.replace(/\s+/g, ' ').trim();
+    // use a non-capturing group to exclude ' or ' and ' vs ' from the matches
+    const wordsInMessage = sanitizedContent.split(/(?: or | vs )/g);
     logger.info(`choosing between [${wordsInMessage}]`);
     if (wordsInMessage.length > 1) {
       const randomNumber = Math.random();
       const index = Math.floor(randomNumber / (1 / wordsInMessage.length));
-      logger.info(`rolled ${randomNumber.toFixed(2)} and chose ${index} [${wordsInMessage[index]}]`);
-      resolve(wordsInMessage[index]);
+      const chosenWord = wordsInMessage[index];
+      logger.info(`rolled ${randomNumber.toFixed(2)} and chose ${index} [${chosenWord}]`);
+      resolve(chosenWord);
     } else {
       const error = 'need multiple values to compare';
       logger.info(error);

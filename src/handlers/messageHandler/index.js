@@ -47,7 +47,7 @@ exports.messageHandler = async (message) => {
   }
   //question
   if (content.startsWith('ds ') && content.endsWith('?')) {
-    if (content.includes(' or ')) {
+    if (content.includes(' or ') || content.includes(' vs ')) {
       compare(content.slice('ds '.length, content.length - 1))
         .then(compareResponse => message.channel.send(compareResponse));
     }

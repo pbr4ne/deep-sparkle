@@ -202,6 +202,17 @@ describe('messageHandler', () => {
       expect(message.channel.send).toHaveBeenCalledWith(response);
     });
 
+    test('should compare when asked this vs that', async () => {
+      const response = 'that';
+      compare.mockImplementationOnce(() => Promise.resolve(response));
+
+      message.content = 'ds this vs that?';
+      await messageHandler(message);
+
+      expect(compare).toHaveBeenCalledWith('this vs that');
+      expect(message.channel.send).toHaveBeenCalledWith(response);
+    });
+
     test('should do nothing when no question mark', async () => {
       const response = 'that';
       compare.mockImplementationOnce(() => Promise.resolve(response));
@@ -224,7 +235,7 @@ describe('messageHandler', () => {
       expect(message.channel.send).not.toHaveBeenCalled();
     });
 
-    test('should do nothing when no "or"', async () => {
+    test('should do nothing when no "or" or "vs"', async () => {
       const response = 'that';
       compare.mockImplementationOnce(() => Promise.resolve(response));
 
