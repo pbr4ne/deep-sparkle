@@ -1,11 +1,11 @@
-const config = require('../../utilities/env');
+const { embed } = require('../../discord/embed');
 const { birthday } = require('../../modules/birthday');
 const { clap } = require('../../modules/clap');
+const { compare } = require('../../modules/compare');
 const { convert } = require('../../modules/convert');
-const { embed } = require('../../discord/embed');
 const { tableflip } = require('../../modules/tableflip');
 const { translate } = require('../../modules/translate');
-const { compare } = require('../../modules/compare');
+const config = require('../../utilities/env');
 
 exports.messageHandler = async (message) => {
   //don't respond to my own message or another bot's message
@@ -18,25 +18,42 @@ exports.messageHandler = async (message) => {
     return;
   }
 
-  const content = message.content.toLowerCase();
-  const contentOriginal = message.content;
-
   //test
-  if (content === 'ds test') {
+  processTest(message);
+
+  //modules
+  processBirthday(message);
+  processClap(message);
+  processConvert(message);
+  processQuestion(message);
+  processTableflip(message);
+  processTranslate(message);
+};
+
+function processTest(message) {
+  if (message.content === 'ds test') {
     message.channel.send('test');
   }
+}
 
-  //birthday
+function processBirthday(message) {
+  const content = message.content.toLowerCase();
   if (content.startsWith('ds birthday')) {
     birthday(content.slice('ds birthday '.length))
       .then(birthdayResponse => message.channel.send(birthdayResponse));
   }
-  //clap
+}
+
+function processClap(message) {
+  const content = message.content.toLowerCase();
   if (content.startsWith('ds clap')) {
-    clap(contentOriginal.slice('ds clap '.length))
+    clap(message.content.slice('ds clap '.length))
       .then(clapResponse => message.channel.send(clapResponse));
   }
-  //convert
+}
+
+function processConvert(message) {
+  const content = message.content.toLowerCase();
   if (content.includes('convert')) {
     convert(content)
       .then(convertResponse => {
@@ -45,21 +62,30 @@ exports.messageHandler = async (message) => {
         }
       });
   }
-  //question
+}
+
+function processQuestion(message) {
+  const content = message.content.toLowerCase();
   if (content.startsWith('ds ') && content.endsWith('?')) {
     if (content.includes(' or ') || content.includes(' vs ')) {
       compare(content.slice('ds '.length, content.length - 1))
         .then(compareResponse => message.channel.send(compareResponse));
     }
   }
-  //tableflip
+}
+
+function processTableflip(message) {
+  const content = message.content.toLowerCase();
   if (content.includes('┻') || (content.includes('https://tenor.com') && content.includes('table'))) {
     tableflip(content)
       .then(tableflipResponse => message.channel.send(tableflipResponse));
   }
-  //translate
+}
+
+function processTranslate(message) {
+  const content = message.content.toLowerCase();
   if (content.startsWith('ds translate')) {
-    translate(contentOriginal.slice('ds translate '.length))
+    translate(message.content.slice('ds translate '.length))
       .then((translateResponse) => message.channel.send({ embeds: [embed(translateResponse)]}));
   }
-};
+}
