@@ -16,7 +16,7 @@
     "convert-units": "^2.3.4",
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",
-    "log4js": "^6.4.1"
+    "log4js": "^6.4.5"
   },
   "devDependencies": {
     "all-contributors-cli": "^6.20.0",
