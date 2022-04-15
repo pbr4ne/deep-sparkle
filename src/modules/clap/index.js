@@ -10,7 +10,7 @@ exports.clap = (content) => {
       if (clapWords[0]) {
         clapResponse = clapWords[0].split('').join(` ${clapEmoji} `);
       }
-    } else if (clapWords.length > 1) {
+    } else {
       clapResponse = clapWords.join(` ${clapEmoji} `);
     }
     clapResponse += ` ${clapEmoji}`;
