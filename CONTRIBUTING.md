@@ -7,14 +7,28 @@ Please feel free to open a pull request and contribute!
 npm install
 ```
 
-## Setup env
-In the root `deep-sparkle` directory, create a `.env` file based on `.env.example`.
+## Setup config
+In the `deep-sparkle/config` directory, create a `production.json` file based on `default.json`.
 
-```
-CLIENT_TOKEN='<discord bot token>'
-CHANNEL_ID='<channel to restrict responses to (optional)>'
-TRANSLATION_API_URL='<Watson Language Translator API URL>'
-TRANSLATION_API_KEY='<Watson Language Translator API Key>'
+```json
+{
+  "discord": {
+    "token": "<discord bot token>"
+  },
+  "global": {
+    "allowed": {
+      "channels": [
+        "<channels to restrict responses to (optional)>"
+      ]
+    }
+  },
+  "modules": {
+    "translate": {
+      "apiUrl": "<Watson Language Translator API URL>",
+      "apiKey": "<Watson Language Translator API Key>"
+    }
+  }
+}
 ```
 
 ## Run unit tests

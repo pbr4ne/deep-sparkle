@@ -1,3 +1,4 @@
+const config = require('config');
 const { embed } = require('../../discord/embed');
 const { birthday } = require('../../modules/birthday');
 const { clap } = require('../../modules/clap');
@@ -5,16 +6,16 @@ const { compare } = require('../../modules/compare');
 const { convert } = require('../../modules/convert');
 const { tableflip } = require('../../modules/tableflip');
 const { translate } = require('../../modules/translate');
-const config = require('../../utilities/env');
 
 exports.messageHandler = async (message) => {
   //don't respond to my own message or another bot's message
   if (message.client.user.id === message.author.id || message.author.bot) {
     return;
   }
-
+  
   //only respond in specified channel, if it is indeed specified
-  if (config.CHANNEL_ID && message.channel.id !== config.CHANNEL_ID) {
+  const allowedChannels = config.get('global.allowed.channels');
+  if (allowedChannels && allowedChannels.length > 0 && !allowedChannels.includes(message.channel.id)) {
     return;
   }
 

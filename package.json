@@ -5,7 +5,7 @@
   "main": "src/DeepSparkle.js",
   "scripts": {
     "lint": "npx eslint src",
-    "start": "node src/DeepSparkle.js",
+    "start": "set NODE_ENV=production&& node src/DeepSparkle.js",
     "test:unit": "jest src",
     "test:coverage": "jest src --coverage"
   },
@@ -13,9 +13,9 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.26.0",
+    "config": "^3.3.7",
     "convert-units": "^2.3.4",
     "discord.js": "^13.6.0",
-    "dotenv": "^16.0.0",
     "log4js": "^6.4.5"
   },
   "devDependencies": {
