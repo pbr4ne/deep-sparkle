@@ -1,0 +1,18 @@
+{
+  "discord": {
+    "token": "123"
+  },
+  "global": {
+    "allowed": {
+      "channels": [
+        "111"
+      ]
+    }
+  },
+  "modules": {
+    "translate": {
+      "apiUrl": "translation-api.html",
+      "apiKey": "translation-api-key"
+    }
+  }
+}

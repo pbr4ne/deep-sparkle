@@ -1,3 +1,4 @@
+const config = require('config');
 const { MessageEmbed } = require('discord.js');
 const { messageHandler } = require('.');
 const { birthday } = require('../../modules/birthday');
@@ -9,7 +10,6 @@ const { tableflip } = require('../../modules/tableflip');
 const { translate } = require('../../modules/translate');
 const Field = require('../../shared/field');
 const Response = require('../../shared/response');
-const config = require('../../utilities/env');
 
 jest.mock('../../modules/birthday');
 jest.mock('../../modules/clap');
@@ -18,6 +18,7 @@ jest.mock('../../modules/convert');
 jest.mock('../../discord/embed');
 jest.mock('../../modules/tableflip');
 jest.mock('../../modules/translate');
+process.env['ALLOW_CONFIG_MUTATIONS']=true;
 
 describe('messageHandler', () => {
   const message = ({
@@ -42,7 +43,7 @@ describe('messageHandler', () => {
     message.client.user.id = '123';
     message.author.id = '456';
     message.author.bot = false;
-    config.CHANNEL_ID = '111';
+    config.global.allowed.channels = ['111'];
     message.channel.id = '111';
   });
 
@@ -82,7 +83,7 @@ describe('messageHandler', () => {
 
   describe('message channel', () => {
     test('should respond to messages when channel is not configured', async () => {
-      delete config.CHANNEL_ID;
+      config.global.allowed.channels = [];
       message.channel.id = '111';
 
       message.content = 'ds test';
@@ -92,7 +93,7 @@ describe('messageHandler', () => {
     });
 
     test('should respond to messages when channel is configured and matches', async () => {
-      config.CHANNEL_ID = '222';
+      config.global.allowed.channels = ['222'];
       message.channel.id = '222';
 
       message.content = 'ds test';
@@ -102,7 +103,7 @@ describe('messageHandler', () => {
     });
 
     test('should ignore messages when channel is configured and doesn\'t match', async() => {
-      config.CHANNEL_ID = '222';
+      config.global.allowed.channels = ['222'];
       message.channel.id = '111';
 
       message.content = 'ds test';
