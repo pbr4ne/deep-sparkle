@@ -5,7 +5,7 @@ describe('bot', () => {
     expect(bot).toMatchObject({
       options: {
         //GUILDS & GUILD_MESSAGES
-        intents: 513,
+        intents: 5633,
       }
     });
   });
