@@ -4,6 +4,7 @@ const { birthday } = require('../../modules/birthday');
 const { clap } = require('../../modules/clap');
 const { compare } = require('../../modules/compare');
 const { convert } = require('../../modules/convert');
+const { raffle } = require('../../modules/raffle');
 const { tableflip } = require('../../modules/tableflip');
 const { translate } = require('../../modules/translate');
 
@@ -27,6 +28,7 @@ exports.messageHandler = async (message) => {
   processClap(message);
   processConvert(message);
   processQuestion(message);
+  processRaffle(message);
   processTableflip(message);
   processTranslate(message);
 };
@@ -72,6 +74,13 @@ function processQuestion(message) {
       compare(content.slice('ds '.length, content.length - 1))
         .then(compareResponse => message.channel.send(compareResponse));
     }
+  }
+}
+
+async function processRaffle(message) {
+  const content = message.content;
+  if (content.toLowerCase().startsWith('ds raffle')) {
+    raffle(message);
   }
 }
 
