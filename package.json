@@ -17,7 +17,9 @@
     "convert-units": "^2.3.4",
     "date-fns": "^2.29.3",
     "discord.js": "^13.6.0",
-    "log4js": "^6.4.5"
+    "log4js": "^6.4.5",
+    "sequelize": "^6.37.5",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "all-contributors-cli": "^6.20.0",

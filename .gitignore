@@ -20,3 +20,6 @@ config/production.json
 
 # Jest coverage
 coverage/
+
+# Database
+database.sqlite
