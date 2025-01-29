@@ -88,7 +88,7 @@ async function processRaffle(message) {
 
 function processReminder(message) {
   const content = message.content.toLowerCase();
-  if (content.startsWith('ds reminder ')) {
+  if (content.startsWith('ds remind')) {
     reminder(message);
   }
 }

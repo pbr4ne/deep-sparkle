@@ -21,7 +21,7 @@ const sendReminder = async (reminder, client) => {
       return;
     }
 
-    await channel.send(`🔔 Reminding ${user}: ${reminder.reminderText}`);
+    await channel.send(`Reminding ${user}: ${reminder.reminderText}`);
     logger.info(`Sent reminder [ID: ${reminder.id}] to ${user.tag}: ${reminder.reminderText}`);
 
     await reminder.update({ completed: true, canceled: false });
@@ -46,13 +46,13 @@ const scheduleReminder = (reminder, client) => {
 
 exports.reminder = async (message) => {
   try {
-    const args = message.content.slice('ds reminder'.length).trim();
+    const args = message.content.slice('ds remind'.length).trim();
 
     const reminderRegex = /^((?:\d+\s*(?:second|minute|hour|day)s?\s*)+)\s+(.+)$/i;
     const match = args.match(reminderRegex);
 
     if (!match) {
-      return message.channel.send('❌ Invalid format. Use: `ds reminder <time> <reminder text>`\nExample: `ds reminder 1 hour Check the oven`');
+      return message.channel.send('Invalid format. Use: `ds remind <time> <reminder text>`\nExample: `ds remind 1 hour Feed Dave`');
     }
 
     const timeStr = match[1].trim();
@@ -60,7 +60,7 @@ exports.reminder = async (message) => {
 
     const timeMs = parseTime(timeStr);
     if (!timeMs) {
-      return message.channel.send('❌ Invalid time format. Use formats like "1 hour", "30 minutes", "1 hour 30 minutes", etc.');
+      return message.channel.send('Invalid time format. Use formats like "1 hour", "30 minutes", "1 hour 30 minutes", etc.');
     }
 
     const remindAt = new Date(Date.now() + timeMs);
@@ -74,13 +74,13 @@ exports.reminder = async (message) => {
       canceled: false, 
     });
 
-    await message.channel.send(`✅ Ok, I will remind ${message.author} "${reminderText}" in ${timeStr}`);
+    await message.channel.send(`I will remind ${message.author} "${reminderText}" in ${timeStr}`);
 
     scheduleReminder(reminder, message.client);
 
     logger.info(`Scheduled reminder [ID: ${reminder.id}] for ${message.author.tag} in ${timeStr}: ${reminderText}`);
   } catch (error) {
     logger.error('Error handling reminder:', error);
-    message.channel.send('❌ There was an error setting your reminder. Please try again.');
+    message.channel.send('There was an error setting your reminder. Please try again.');
   }
 };
