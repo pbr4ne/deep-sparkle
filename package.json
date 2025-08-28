@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "npx eslint src",
     "start": "set NODE_ENV=production&& node src/DeepSparkle.js",
+    "deploy": "set NODE_ENV=production&& node deploy-commands.js",
     "test:unit": "jest src",
     "test:coverage": "jest src --coverage"
   },
@@ -13,11 +14,14 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.26.0",
+    "chrono-node": "^2.8.4",
     "config": "^3.3.7",
     "convert-units": "^2.3.4",
     "date-fns": "^2.29.3",
     "discord.js": "^14.22.1",
     "log4js": "^6.4.5",
+    "luxon": "^3.7.1",
+    "ms": "^2.1.3",
     "sequelize": "^6.37.5",
     "sqlite3": "^5.1.7"
   },
