@@ -1,16 +1,19 @@
-const { Client, Intents, Partials } = require('discord.js');
+const { Client, GatewayIntentBits, Partials } = require('discord.js');
 
 const intents = [
-  Intents.FLAGS.DIRECT_MESSAGES,
-  Intents.FLAGS.GUILDS,
-  Intents.FLAGS.GUILD_MEMBERS,
-  Intents.FLAGS.GUILD_MESSAGES,
-  Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-  Intents.FLAGS.GUILD_PRESENCES,
+	GatewayIntentBits.Guilds,
+	GatewayIntentBits.GuildMembers,
+	GatewayIntentBits.GuildMessages,
+	GatewayIntentBits.GuildMessageReactions,
+	GatewayIntentBits.GuildPresences,
+	GatewayIntentBits.DirectMessages,
+	GatewayIntentBits.MessageContent
 ];
 
 const partials = [
-  'CHANNEL'
+	Partials.Channel,
+	Partials.Message,
+	Partials.Reaction
 ];
 
 exports.bot = new Client({ intents, partials });
