@@ -44,19 +44,13 @@ exports.execute = async (interaction) => {
 	}
 
 	await createReminder({
+		client: interaction.client,
 		userId: interaction.user.id,
 		channelId: interaction.channelId,
 		when,
 		text,
 		isPrivate,
 		zone: zone || process.env.BOT_TZ || 'UTC',
-		reply: (out) => interaction.reply({ content: out, ephemeral: isPrivate }),
-		deliver: async (out) => {
-			if (isPrivate) {
-				try { await interaction.user.send(out); return; } catch {}
-			}
-			const ch = await interaction.client.channels.fetch(interaction.channelId);
-			await ch.send(out);
-		}
-	});
+		reply: (out) => interaction.reply({ content: out, ephemeral: isPrivate })
+	})
 };

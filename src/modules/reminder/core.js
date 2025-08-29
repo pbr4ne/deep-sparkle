@@ -1,33 +1,30 @@
 const ms = require('ms');
 const chrono = require('chrono-node');
 const { DateTime, IANAZone } = require('luxon');
+const Reminder = require('./reminderModel');
+const { scheduleReminder } = require('./scheduler');
+const { formatOffset } = require('./tz');
 
 const DEFAULT_HOUR = parseInt(process.env.REMINDER_DEFAULT_HOUR ?? '9', 10);
 const DEFAULT_MINUTE = parseInt(process.env.REMINDER_DEFAULT_MINUTE ?? '0', 10);
-const MAX_TIMEOUT = 2 ** 31 - 1;
 
-exports.createReminder = async ({ userId, when, text, isPrivate, reply, deliver, zone }) => {
+exports.createReminder = async ({ client, userId, channelId, when, text, isPrivate, zone, reply }) => {
 	const parsed = parseWhen(when, zone);
 	if (!parsed) {
 		return reply('I couldn\'t parse the time.');
 	}
 	if (parsed.mode === 'duration') {
+		const remindAt = DateTime.utc().plus({ milliseconds: parsed.delay }).toJSDate();
 		await reply(`Okay <@${userId}>. I'll remind you "${text}" in ${ms(parsed.delay, { long: true })}.`);
-		schedule(parsed.delay, async () => {
-			const out = `⏰ Reminding <@${userId}>: ${text}`;
-			await deliver(out);
-		});
+		const r = await Reminder.create({ userId, channelId, text, isPrivate, remindAt, completed: false, canceled: false, createdAt: new Date() });
+		scheduleReminder(r.id, client);
 		return;
 	}
-	await reply(`Okay <@${userId}>. I'll remind you "${text}" at ${formatInZone(parsed.target, parsed.displayZone)}.`);
-	const delay = parsed.target.toMillis() - Date.now();
-	if (delay <= 0) {
-		return;
-	}
-	schedule(delay, async () => {
-		const out = `⏰ Reminding <@${userId}>: ${text}`;
-		await deliver(out);
-	});
+	const display = formatInZone(parsed.target.setZone('utc'), parsed.displayZone);
+	await reply(`Okay <@${userId}>. I'll remind you "${text}" at ${display}.`);
+	const remindAt = parsed.target.setZone('utc').toJSDate();
+	const r = await Reminder.create({ userId, channelId, text, isPrivate, remindAt, completed: false, canceled: false, createdAt: new Date() });
+	scheduleReminder(r.id, client);
 };
 
 function parseWhen(input, preferredZone) {
@@ -96,13 +93,6 @@ function pickDisplayZoneForOffset(offsetMins, atUtc, preferredZone) {
 	return `UTC${formatOffset(offsetMins)}`;
 }
 
-function schedule(delay, cb) {
-	if (delay <= MAX_TIMEOUT) {
-		return setTimeout(cb, delay);
-	}
-	setTimeout(() => schedule(delay - MAX_TIMEOUT, cb), MAX_TIMEOUT);
-}
-
 function formatInZone(dt, zoneName) {
 	const zdt = dt.setZone(zoneName);
 	const a = zdt.offsetNameShort || (() => {
@@ -113,12 +103,4 @@ function formatInZone(dt, zoneName) {
 		return null;
 	})() || `UTC${zdt.toFormat('ZZ')}`;
 	return `${zdt.toFormat('EEE, LLL d yyyy h:mm a')} ${a}`;
-}
-
-function formatOffset(mins) {
-	const sign = mins >= 0 ? '+' : '-';
-	const a = Math.abs(mins);
-	const h = String(Math.floor(a / 60)).padStart(2, '0');
-	const m = String(a % 60).padStart(2, '0');
-	return `${sign}${h}:${m}`;
 }

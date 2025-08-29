@@ -49,4 +49,4 @@ function formatOffset(mins) {
 	return `${sign}${h}:${m}`;
 }
 
-module.exports = { normalizeZone };
+module.exports = { normalizeZone, formatOffset };

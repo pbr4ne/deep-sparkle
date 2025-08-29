@@ -13,11 +13,15 @@ const Reminder = sequelize.define('Reminder', {
   },
   channelId: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
-  reminderText: {
+  text: {
     type: DataTypes.TEXT,
     allowNull: false,
+  },
+  isPrivate: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
   },
   remindAt: {
     type: DataTypes.DATE,
@@ -25,12 +29,10 @@ const Reminder = sequelize.define('Reminder', {
   },
   completed: {
     type: DataTypes.BOOLEAN,
-    allowNull: false,
     defaultValue: false,
   },
   canceled: {
     type: DataTypes.BOOLEAN,
-    allowNull: false,
     defaultValue: false,
   },
   createdAt: {
@@ -39,6 +41,7 @@ const Reminder = sequelize.define('Reminder', {
   },
 }, {
   tableName: 'reminders',
+  timestamps: false,
 });
 
 module.exports = Reminder;
